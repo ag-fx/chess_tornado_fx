@@ -14,7 +14,7 @@ import kotlin.math.abs
 /**
  * Main view
  */
-class MainView : View("ChesterChess") {
+class MainView : View("TornadoChess") {
     /**
      * root of stage
      */
@@ -113,7 +113,6 @@ class MainView : View("ChesterChess") {
 
         spawnAllPieces()
 
-        primaryStage.isResizable = false
     }
 
     /**
