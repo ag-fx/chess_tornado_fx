@@ -54,7 +54,8 @@ class MainView : View("ChesterChess") {
      * Make desk and start game
      */
     init {
-        primaryStage.isResizable = false
+        currentStage!!.icons.add(Image("file:src\\main\\resources\\icon.png"))
+
         with(root) {
             top {
                 vbox {
@@ -109,7 +110,10 @@ class MainView : View("ChesterChess") {
                 }
             }
         }
+
         spawnAllPieces()
+
+        primaryStage.isResizable = false
     }
 
     /**
