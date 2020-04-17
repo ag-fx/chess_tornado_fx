@@ -37,4 +37,5 @@ abstract class Piece(color: PieceColor) {
      */
     abstract fun getPossibleMovies(x: Int, y: Int): List<Pair<Int, Int>>
 
+    override fun hashCode(): Int = this.toString().hashCode()
 }
