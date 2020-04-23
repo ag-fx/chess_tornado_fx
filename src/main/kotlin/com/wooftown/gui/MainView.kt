@@ -1,5 +1,6 @@
 package com.wooftown.gui
 
+import com.wooftown.controll.Controller
 import com.wooftown.core.pieces.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
@@ -19,7 +20,6 @@ class MainView : View("TornadoChess") {
     private val controller = Controller(desk)
 
     private var statusText = text("")
-
 
     init {
         currentStage!!.icons.add(Image("file:src\\main\\resources\\icon.png"))
@@ -87,7 +87,6 @@ class MainView : View("TornadoChess") {
 
     }
 
-
     private fun updateStatus() {
         statusText.apply {
             text = if (controller.getTurn() == PieceColor.WHITE) {
@@ -108,13 +107,10 @@ class MainView : View("TornadoChess") {
         }
     }
 
-
     private fun restartGame() {
         controller.clear()
         spawnAllPieces()
     }
-
-
 
 
     private fun spawnAllPieces() {

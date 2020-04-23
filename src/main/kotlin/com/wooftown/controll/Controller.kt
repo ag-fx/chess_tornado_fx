@@ -1,7 +1,8 @@
-package com.wooftown.gui
+package com.wooftown.controll
 
 import com.wooftown.core.pieces.Piece
 import com.wooftown.core.pieces.PieceColor
+import com.wooftown.gui.DeskGUI
 import javafx.scene.paint.Color
 
 class Controller(private val desk: DeskGUI) {
@@ -14,8 +15,7 @@ class Controller(private val desk: DeskGUI) {
 
     fun getTurn() = turnNow
 
-
-    fun handle(row : Int , column : Int){
+    fun handle(row: Int, column: Int) {
         if (lastChosenPiece && row to column in lastChosenPieceMovies.drop(1)) {
             val oldRow = lastChosenPieceMovies.first().first
             val oldColumn = lastChosenPieceMovies.first().second
@@ -41,8 +41,6 @@ class Controller(private val desk: DeskGUI) {
         }
     }
 
-
-
     private fun enableHint() {
         for ((x, y) in lastChosenPieceMovies.drop(1)) {
             if ((x + y) % 2 == 0) {
@@ -53,7 +51,6 @@ class Controller(private val desk: DeskGUI) {
             }
         }
     }
-
 
     private fun disableHint() {
         for ((x, y) in lastChosenPieceMovies) {
@@ -66,7 +63,7 @@ class Controller(private val desk: DeskGUI) {
         }
     }
 
-    fun clear(){
+    fun clear() {
         desk.clear()
         disableHint()
         turnNow = PieceColor.WHITE

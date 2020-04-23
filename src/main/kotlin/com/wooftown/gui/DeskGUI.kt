@@ -11,37 +11,36 @@ import kotlin.math.abs
 // расширенный класс доски, в которой реализованы ходы
 
 class DeskGUI : ChessBoard() {
-    private lateinit var cells : List<List<Rectangle>>
-    private lateinit var images : List<List<ImageView>>
+    private lateinit var cells: List<List<Rectangle>>
+    private lateinit var images: List<List<ImageView>>
 
-    fun setUp(cells : List<List<Rectangle>>,images : List<List<ImageView>>){
+    fun setUp(cells: List<List<Rectangle>>, images: List<List<ImageView>>) {
         this.cells = cells
         this.images = images
     }
 
-
-    private fun setImage(row : Int, column : Int, image : Image?){
+    private fun setImage(row: Int, column: Int, image: Image?) {
         images[row][column].image = image
     }
 
-    private fun getImage(row : Int, column : Int) : Image? = images[row][column].image
+    private fun getImage(row: Int, column: Int): Image? = images[row][column].image
 
-    fun setCellColor(row: Int ,column: Int , color : Color){
+    fun setCellColor(row: Int, column: Int, color: Color) {
         cells[row][column].fill = color
     }
 
-    fun spawnPiece(piece: Piece, row: Int, column: Int){
-        this[row,column]= piece
-        setImage(row,column, Image("file:src\\main\\resources\\${piece}.png"))
+    fun spawnPiece(piece: Piece, row: Int, column: Int) {
+        this[row, column] = piece
+        setImage(row, column, Image("file:src\\main\\resources\\${piece}.png"))
     }
 
-    private fun despairPiece(row:Int, column : Int){
-        this[row,column] = null
-        setImage(row,column, null)
+    private fun despairPiece(row: Int, column: Int) {
+        this[row, column] = null
+        setImage(row, column, null)
 
     }
 
-    fun movePiece(row: Int, column: Int, newRow: Int, newColumn: Int){
+    fun movePiece(row: Int, column: Int, newRow: Int, newColumn: Int) {
 
         if (this[row, column] is King) {
             val castleX = if (this[row, column]!!.color == PieceColor.WHITE) {
@@ -50,7 +49,7 @@ class DeskGUI : ChessBoard() {
                 0
             }
             if (column - newColumn == 2) {
-                movePiece(castleX,0,castleX,3)
+                movePiece(castleX, 0, castleX, 3)
 
             }
             if (newColumn - column == 2) {
@@ -87,11 +86,9 @@ class DeskGUI : ChessBoard() {
 
     }
 
-
-
     override fun clear() {
         super.clear()
-        images.forEach { list -> list.forEach{ it.image = null } }
+        images.forEach { list -> list.forEach { it.image = null } }
     }
 
 }
