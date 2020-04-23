@@ -7,7 +7,7 @@ import com.wooftown.core.pieces.PieceColor
 /**
  * Chess desk
  */
-class ChessBoard : Board<Piece?> {
+open class ChessBoard : Board<Piece?> {
     /**
      * Out gaming desk
      */
@@ -67,7 +67,7 @@ class ChessBoard : Board<Piece?> {
     /**
      * Clear desk
      */
-    fun clear() {
+    open fun clear() {
         for (i in 0..7) {
             for (j in 0..7) {
                 data[i][j] = null
