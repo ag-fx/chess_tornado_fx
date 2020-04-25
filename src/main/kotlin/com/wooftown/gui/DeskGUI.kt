@@ -28,18 +28,13 @@ class DeskGUI : ChessBoard() {
     /**
      * Pieces style
      */
-    private var style = "classic"
+    private var style = PieceStyles.CLASSIC
 
     /**
      * Set style
      */
     fun setStyle(newStyle: PieceStyles) {
-        style = when (newStyle) {
-            PieceStyles.CLASSIC -> "classic"
-            PieceStyles.BERLIN -> "berlin"
-            PieceStyles.METRO -> "metro"
-            PieceStyles.CHESS24 -> "chess24"
-        }
+        style = newStyle
         redrawAll()
     }
 
