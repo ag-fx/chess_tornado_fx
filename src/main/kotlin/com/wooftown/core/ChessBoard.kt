@@ -118,25 +118,16 @@ open class ChessBoard : Board<Piece?> {
      * check for looser in game
      * @return color of looser
      */
-    fun checkLooser(): PieceColor? {
-        val castledColor = if (kingUnderAttack(PieceColor.WHITE)) {
-            PieceColor.WHITE
-        } else {
-            if (kingUnderAttack(PieceColor.BLACK)) {
-                PieceColor.BLACK
-            } else {
-                return null
-            }
-        }
+    fun checkLooser(color: PieceColor): Boolean {
         for (i in 0 until BOARD_SIZE) {
             for (j in 0 until BOARD_SIZE) {
-                if (data[i][j] != null && data[i][j]!!.color == castledColor) {
+                if (data[i][j] != null && data[i][j]!!.color == color) {
                     if (getPossibleMovies(i, j).size > 1) {
-                        return null
+                        return false
                     }
                 }
             }
         }
-        return castledColor
+        return true
     }
 }

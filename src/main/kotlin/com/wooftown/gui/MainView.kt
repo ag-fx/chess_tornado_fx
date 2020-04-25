@@ -135,15 +135,15 @@ class MainView : View("TornadoChess") {
                 "Black's turn"
             }
         }
-        if (desk.checkLooser() != null) {
+        if (desk.checkLooser(controller.getTurn())) {
             statusText.apply {
-                text = if (desk.checkLooser()!!.opposite() == PieceColor.WHITE) {
+                text = if (controller.getTurn().opposite() == PieceColor.WHITE) {
                     "White win"
                 } else {
                     "Black win"
                 }
             }
-            WinnerDialog(desk.checkLooser()!!.opposite()).showAndWait()
+            WinnerDialog(controller.getTurn().opposite()).showAndWait()
         }
     }
 
