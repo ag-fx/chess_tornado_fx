@@ -2,6 +2,7 @@ package com.wooftown.gui
 
 import com.wooftown.controll.Controller
 import com.wooftown.core.pieces.*
+import javafx.beans.value.ObservableValue
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.layout.BorderPane
@@ -22,7 +23,13 @@ class MainView : View("TornadoChess") {
     private var statusText = text("")
 
     init {
-        currentStage!!.icons.add(Image("file:src\\main\\resources\\icon.png"))
+        primaryStage.icons.add(Image("file:src\\main\\resources\\icon.png"))
+        setWindowMinSize(800,850)
+
+        // stupid code
+        primaryStage.widthProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.height = t1.toDouble().plus(35)}
+        primaryStage.heightProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.width = t1.toDouble().minus(35)}
+
 
         with(root) {
             top {
@@ -62,14 +69,23 @@ class MainView : View("TornadoChess") {
                                         } else {
                                             Color.rgb(181, 136, 99)
                                         }
-                                        width = 100.0
-                                        height = 100.0
+
+                                        prefWidth = 100.0
+                                        prefHeight = 100.0
+
+                                        widthProperty().bind(root.widthProperty().divide(8) )
+                                        heightProperty().bind(widthProperty() - 5)
+
                                     }
                                     val image = imageview {
                                         image = null
+                                        fitHeightProperty().bind(rectangle.heightProperty() / 14 * 8)
+                                        fitWidthProperty().bind(fitHeightProperty())
                                     }
+
                                     setUpCells[row][column] = rectangle
                                     setUpImages[row][column] = image
+
                                     setOnMouseClicked {
                                         controller.handle(row, column)
                                         updateStatus()
@@ -86,6 +102,8 @@ class MainView : View("TornadoChess") {
         spawnAllPieces()
 
     }
+
+
 
     private fun updateStatus() {
         statusText.apply {
