@@ -9,39 +9,90 @@ import javafx.scene.shape.Rectangle
 import kotlin.math.abs
 
 // расширенный класс доски, в которой реализованы ходы
-
+/**
+ * Extended desk class for interaction with GUI
+ */
 class DeskGUI : ChessBoard() {
+    /**
+     * List of cells for changing their
+     */
     private lateinit var cells: List<List<Rectangle>>
+    /**
+     * List of images for changing their
+     */
     private lateinit var images: List<List<ImageView>>
 
+    /**
+     * Something like init/constructor
+     * @param cells - list of cells of grid
+     * @param images - images on this cells
+     */
     fun setUp(cells: List<List<Rectangle>>, images: List<List<ImageView>>) {
         this.cells = cells
         this.images = images
     }
 
+    /**
+     * Change image on this cell
+     * @param row - row of cell
+     * @param column - column of cell
+     * @param image - new image
+     */
     private fun setImage(row: Int, column: Int, image: Image?) {
         images[row][column].image = image
     }
 
+    /**
+     * Get image of this cell
+     * @param row - row of cell
+     * @param column - column of cell
+     * @return image?
+     */
     private fun getImage(row: Int, column: Int): Image? = images[row][column].image
 
+    /**
+     * Change color of this cell
+     * @param row - row of cell
+     * @param column - column of cell
+     * @param color - new color
+     */
     fun setCellColor(row: Int, column: Int, color: Color) {
         cells[row][column].fill = color
     }
 
+    /**
+     * Set up piece on super.desk and add image of cell
+     * @param row - row of cell
+     * @param column - column of cell
+     * @param piece - piece
+     */
     fun spawnPiece(piece: Piece, row: Int, column: Int) {
         this[row, column] = piece
         setImage(row, column, Image("file:src\\main\\resources\\${piece}.png"))
     }
 
+    /**
+     * Delete piece
+     * @param row - row of cell
+     * @param column - column of cell
+     */
     private fun despairPiece(row: Int, column: Int) {
         this[row, column] = null
         setImage(row, column, null)
 
     }
 
+    /**
+     * Moving piece
+     * Dealt with many cases
+     * @param row - old row of cell
+     * @param column - old column of cell
+     * @param newRow - new row of cell
+     * @param newColumn - new column of cell
+    */
     fun movePiece(row: Int, column: Int, newRow: Int, newColumn: Int) {
 
+        // castling
         if (this[row, column] is King) {
             val castleX = if (this[row, column]!!.color == PieceColor.WHITE) {
                 7
@@ -63,7 +114,8 @@ class DeskGUI : ChessBoard() {
         setImage(newRow, newColumn, getImage(row, column))
         setImage(row, column, null)
 
-
+        // changing to queen
+        //el passant
         if (this[newRow, newColumn] is Pawn) {
 
             (this[newRow, newColumn] as Pawn).moveDouble = abs(newRow - row) == 2
@@ -86,6 +138,9 @@ class DeskGUI : ChessBoard() {
 
     }
 
+    /**
+     * Clear super.desk and our gui desk
+     */
     override fun clear() {
         super.clear()
         images.forEach { list -> list.forEach { it.image = null } }

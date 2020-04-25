@@ -12,24 +12,37 @@ import javafx.scene.shape.Rectangle
 import javafx.scene.text.Font
 import tornadofx.*
 
-
+/**
+ * Main game view
+ */
 class MainView : View("TornadoChess") {
-
+    /**
+     * Core parent
+     */
     override val root = BorderPane()
 
+    /**
+     * Gaming desk
+     */
     private val desk = DeskGUI()
 
+    /**
+     * Controller
+     */
     private val controller = Controller(desk)
 
+    /**
+     * Status of game
+     */
     private var statusText = text("")
 
     init {
         primaryStage.icons.add(Image("file:src\\main\\resources\\icon.png"))
-        setWindowMinSize(800,850)
+        setWindowMinSize(800, 850)
 
         // stupid code
-        primaryStage.widthProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.height = t1.toDouble().plus(35)}
-        primaryStage.heightProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.width = t1.toDouble().minus(35)}
+        primaryStage.widthProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.height = t1.toDouble().plus(35) }
+        primaryStage.heightProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.width = t1.toDouble().minus(35) }
 
 
         with(root) {
@@ -56,6 +69,7 @@ class MainView : View("TornadoChess") {
                     }
                 }
             }
+
             center {
                 gridpane {
                     val setUpCells = MutableList(BOARD_SIZE) { MutableList(BOARD_SIZE) { Rectangle() } }
@@ -74,7 +88,7 @@ class MainView : View("TornadoChess") {
                                         prefWidth = 100.0
                                         prefHeight = 100.0
 
-                                        widthProperty().bind(root.widthProperty().divide(BOARD_SIZE) )
+                                        widthProperty().bind(root.widthProperty().divide(BOARD_SIZE))
                                         heightProperty().bind(widthProperty() - 5)
 
                                     }
@@ -105,7 +119,9 @@ class MainView : View("TornadoChess") {
     }
 
 
-
+    /**
+     * updating status after turn
+     */
     private fun updateStatus() {
         statusText.apply {
             text = if (controller.getTurn() == PieceColor.WHITE) {
@@ -126,12 +142,17 @@ class MainView : View("TornadoChess") {
         }
     }
 
+    /**
+     * Restarting game
+     */
     private fun restartGame() {
         controller.clear()
         spawnAllPieces()
     }
 
-
+    /**
+     * Spawn all piece on start game
+     */
     private fun spawnAllPieces() {
         with(desk) {
             for (column in 0 until BOARD_SIZE) {
@@ -156,8 +177,6 @@ class MainView : View("TornadoChess") {
             spawnPiece(Bishop(PieceColor.WHITE), 7, 2)
         }
     }
-
-
 }
 
 
