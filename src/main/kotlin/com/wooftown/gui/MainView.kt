@@ -1,6 +1,7 @@
 package com.wooftown.gui
 
 import com.wooftown.controll.Controller
+import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.pieces.*
 import javafx.beans.value.ObservableValue
 import javafx.scene.image.Image
@@ -57,11 +58,11 @@ class MainView : View("TornadoChess") {
             }
             center {
                 gridpane {
-                    val setUpCells = MutableList(8) { MutableList(8) { Rectangle() } }
-                    val setUpImages = MutableList(8) { MutableList(8) { ImageView() } }
-                    for (row in 0..7) {
+                    val setUpCells = MutableList(BOARD_SIZE) { MutableList(BOARD_SIZE) { Rectangle() } }
+                    val setUpImages = MutableList(BOARD_SIZE) { MutableList(BOARD_SIZE) { ImageView() } }
+                    for (row in 0 until BOARD_SIZE) {
                         row {
-                            for (column in 0..7) {
+                            for (column in 0 until BOARD_SIZE) {
                                 stackpane {
                                     val rectangle = rectangle {
                                         fill = if ((row + column) % 2 == 0) {
@@ -73,13 +74,13 @@ class MainView : View("TornadoChess") {
                                         prefWidth = 100.0
                                         prefHeight = 100.0
 
-                                        widthProperty().bind(root.widthProperty().divide(8) )
+                                        widthProperty().bind(root.widthProperty().divide(BOARD_SIZE) )
                                         heightProperty().bind(widthProperty() - 5)
 
                                     }
                                     val image = imageview {
                                         image = null
-                                        fitHeightProperty().bind(rectangle.heightProperty() / 14 * 8)
+                                        fitHeightProperty().bind(rectangle.heightProperty() / 14 * BOARD_SIZE)
                                         fitWidthProperty().bind(fitHeightProperty())
                                     }
 
@@ -133,7 +134,7 @@ class MainView : View("TornadoChess") {
 
     private fun spawnAllPieces() {
         with(desk) {
-            for (column in 0..7) {
+            for (column in 0 until BOARD_SIZE) {
                 spawnPiece(Pawn(PieceColor.BLACK), 1, column)
                 spawnPiece(Pawn(PieceColor.WHITE), 6, column)
             }
