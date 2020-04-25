@@ -1,6 +1,7 @@
 package com.wooftown.core.pieces
 
 import com.wooftown.core.ChessBoard
+import com.wooftown.core.PieceColor
 
 /**
  * abstract description of piece

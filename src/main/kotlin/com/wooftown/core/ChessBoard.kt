@@ -2,7 +2,6 @@ package com.wooftown.core
 
 import com.wooftown.core.pieces.King
 import com.wooftown.core.pieces.Piece
-import com.wooftown.core.pieces.PieceColor
 
 /**
  * Chess desk

@@ -2,6 +2,7 @@ package com.wooftown.gui
 
 import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.ChessBoard
+import com.wooftown.core.PieceColor
 import com.wooftown.core.pieces.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView

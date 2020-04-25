@@ -1,4 +1,4 @@
-package com.wooftown.core.pieces
+package com.wooftown.core
 
 /**
  * Colors of pieces

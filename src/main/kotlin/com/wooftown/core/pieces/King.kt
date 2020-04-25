@@ -1,6 +1,7 @@
 package com.wooftown.core.pieces
 
 import com.wooftown.core.BOARD_SIZE
+import com.wooftown.core.PieceColor
 
 /**
  * King

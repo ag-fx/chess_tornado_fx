@@ -1,7 +1,7 @@
 package com.wooftown.controll
 
 import com.wooftown.core.pieces.Piece
-import com.wooftown.core.pieces.PieceColor
+import com.wooftown.core.PieceColor
 import com.wooftown.gui.DeskGUI
 import javafx.scene.paint.Color
 

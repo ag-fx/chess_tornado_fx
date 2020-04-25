@@ -1,6 +1,6 @@
 package com.wooftown.gui
 
-import com.wooftown.core.pieces.PieceColor
+import com.wooftown.core.PieceColor
 import javafx.scene.control.ButtonBar
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Dialog

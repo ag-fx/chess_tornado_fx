@@ -2,6 +2,7 @@ package com.wooftown.gui
 
 import com.wooftown.controll.Controller
 import com.wooftown.core.BOARD_SIZE
+import com.wooftown.core.PieceColor
 import com.wooftown.core.pieces.*
 import javafx.beans.value.ObservableValue
 import javafx.scene.image.Image
