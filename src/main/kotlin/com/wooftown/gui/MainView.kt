@@ -44,7 +44,6 @@ class MainView : View("TornadoChess") {
         primaryStage.widthProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.height = t1.toDouble().plus(35) }
         primaryStage.heightProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.width = t1.toDouble().minus(35) }
 
-
         with(root) {
             top {
                 vbox {
@@ -83,53 +82,45 @@ class MainView : View("TornadoChess") {
                     }
                 }
             }
-
             center {
                 gridpane {
-                    val setUpCells = MutableList(BOARD_SIZE) { MutableList(BOARD_SIZE) { Rectangle() } }
-                    val setUpImages = MutableList(BOARD_SIZE) { MutableList(BOARD_SIZE) { ImageView() } }
+                    val setUpCells = List(BOARD_SIZE) { MutableList(BOARD_SIZE) {Rectangle()} }
+                    val setUpImages = List(BOARD_SIZE) { MutableList(BOARD_SIZE) { ImageView() } }
                     for (row in 0 until BOARD_SIZE) {
                         row {
                             for (column in 0 until BOARD_SIZE) {
                                 stackpane {
-                                    val rectangle = rectangle {
+                                    setUpCells[row][column] = rectangle {
                                         fill = if ((row + column) % 2 == 0) {
                                             Color.rgb(240, 217, 181)
                                         } else {
                                             Color.rgb(181, 136, 99)
                                         }
-
-                                        prefWidth = 100.0
-                                        prefHeight = 100.0
-
                                         widthProperty().bind(root.widthProperty().divide(BOARD_SIZE))
                                         heightProperty().bind(widthProperty() - 5)
-
+                                        // prefsize 100
                                     }
-                                    val image = imageview {
-                                        image = null
-                                        fitHeightProperty().bind(rectangle.heightProperty() / 14 * BOARD_SIZE)
+
+                                    setUpImages[row][column] = imageview {
+                                        fitHeightProperty().bind(setUpCells[row][column].heightProperty() / 14 * BOARD_SIZE)
                                         fitWidthProperty().bind(fitHeightProperty())
+                                        // prefsize 80
                                     }
-
-                                    setUpCells[row][column] = rectangle
-                                    setUpImages[row][column] = image
-
-                                    setOnMouseClicked {
+                                     setOnMouseClicked {
                                         controller.handle(row, column)
                                         updateStatus()
                                     }
+
                                 }
                             }
                         }
                     }
+                    // это мне очень не нравится, посмотрю как бы сделать норм
                     desk.setUp(setUpCells, setUpImages)
                 }
             }
         }
-
         spawnAllPieces()
-
     }
 
 
