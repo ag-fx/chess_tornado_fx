@@ -13,18 +13,11 @@ import kotlin.math.abs
 // можно было бы всё перенести в контроллер
 /**
  * Extended desk class for interaction with GUI
+ * @param cells - List of cells for changing their
+ * @param images - List of images for changing their
  */
-class DeskGUI : ChessBoard() {
-    /**
-     * List of cells for changing their
-     */
-    private lateinit var cells: List<List<Rectangle>>
-
-    /**
-     * List of images for changing their
-     */
-    private lateinit var images: List<List<ImageView>>
-
+class DeskGUI(private val cells: List<List<Rectangle>> ,
+              private val images: List<List<ImageView>> ) : ChessBoard() {
     /**
      * Pieces style
      */
@@ -51,16 +44,6 @@ class DeskGUI : ChessBoard() {
         }
     }
 
-
-    /**
-     * Something like init/constructor
-     * @param cells - list of cells of grid
-     * @param images - images on this cells
-     */
-    fun setUp(cells: List<List<Rectangle>>, images: List<List<ImageView>>) {
-        this.cells = cells
-        this.images = images
-    }
 
     /**
      * Change image on this cell

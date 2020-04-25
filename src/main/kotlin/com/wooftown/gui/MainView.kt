@@ -12,6 +12,8 @@ import javafx.scene.shape.Rectangle
 import javafx.scene.text.Font
 import tornadofx.*
 
+//Либо я делаю лейтинит поля в классе деск и потом их заполняю через метод
+//Либо я делаю сам деск лейтинит и иницилизирую его через конструктор,но тогда поле в контроллере будет лейтинит
 /**
  * Main game view
  */
@@ -24,12 +26,12 @@ class MainView : View("TornadoChess") {
     /**
      * Gaming desk
      */
-    private val desk = DeskGUI()
+    private lateinit var desk : DeskGUI
 
     /**
      * Controller
      */
-    private val controller = Controller(desk)
+    private val controller = Controller()
 
     /**
      * Status of game
@@ -98,13 +100,14 @@ class MainView : View("TornadoChess") {
                                         }
                                         widthProperty().bind(root.widthProperty().divide(BOARD_SIZE))
                                         heightProperty().bind(widthProperty() - 5)
-                                        // prefsize 100
+                                        // pref size 100
                                     }
 
                                     setUpImages[row][column] = imageview {
-                                        fitHeightProperty().bind(setUpCells[row][column].heightProperty() / 14 * BOARD_SIZE)
+                                        fitHeightProperty().bind(
+                                                setUpCells[row][column].heightProperty() / 14 * BOARD_SIZE)
                                         fitWidthProperty().bind(fitHeightProperty())
-                                        // prefsize 80
+                                        // pref size 80
                                     }
                                      setOnMouseClicked {
                                         controller.handle(row, column)
@@ -115,8 +118,8 @@ class MainView : View("TornadoChess") {
                             }
                         }
                     }
-                    // это мне очень не нравится, посмотрю как бы сделать норм
-                    desk.setUp(setUpCells, setUpImages)
+                    desk = DeskGUI(setUpCells,setUpImages)
+                    controller.setDeskPointer(desk)
                 }
             }
         }
@@ -135,7 +138,7 @@ class MainView : View("TornadoChess") {
                 "Black's turn"
             }
         }
-        if (desk.checkLooser(controller.getTurn())) {
+        if (desk.isLooser(controller.getTurn())) {
             statusText.apply {
                 text = if (controller.getTurn().opposite() == PieceColor.WHITE) {
                     "White win"
@@ -153,6 +156,7 @@ class MainView : View("TornadoChess") {
     private fun restartGame() {
         controller.clear()
         spawnAllPieces()
+        updateStatus()
     }
 
     /**

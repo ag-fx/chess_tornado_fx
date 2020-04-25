@@ -7,7 +7,7 @@ import com.wooftown.core.pieces.PieceColor
 /**
  * Chess desk
  */
-open class ChessBoard : Board<Piece?> {
+open class ChessBoard{
     /**
      * Out gaming desk
      */
@@ -40,7 +40,7 @@ open class ChessBoard : Board<Piece?> {
      * @param y - y cords of desk
      * @return desk[x][y] piece
      */
-    override fun get(x: Int, y: Int): Piece? = data[x][y]
+    operator fun get(x: Int, y: Int): Piece? = data[x][y]
 
     /**
      * set piece on x y
@@ -48,7 +48,7 @@ open class ChessBoard : Board<Piece?> {
      * @param y - y cords of desk
      * @param value
      */
-    override fun set(x: Int, y: Int, value: Piece?) {
+    operator fun set(x: Int, y: Int, value: Piece?) {
         require(x in 0 until BOARD_SIZE && y in 0 until BOARD_SIZE)
         data[x][y] = value
         if (value is Piece) {
@@ -79,7 +79,7 @@ open class ChessBoard : Board<Piece?> {
      * @param color - color of checking player
      * @return boolean - true os castled
      */
-    private fun kingUnderAttack(color: PieceColor): Boolean {
+    private fun isCheck(color: PieceColor): Boolean {
         val king = getKing(color)
         for (i in 0 until BOARD_SIZE) {
             for (j in 0 until BOARD_SIZE) {
@@ -105,7 +105,7 @@ open class ChessBoard : Board<Piece?> {
             val otherPiece = this[move.first, move.second]
             this[move.first, move.second] = piece
             this[x, y] = null
-            if (!kingUnderAttack(piece!!.color)) {
+            if (!isCheck(piece!!.color)) {
                 result.add(move)
             }
             this[x, y] = piece
@@ -118,7 +118,7 @@ open class ChessBoard : Board<Piece?> {
      * check for looser in game
      * @return color of looser
      */
-    fun checkLooser(color: PieceColor): Boolean {
+    fun isLooser(color: PieceColor): Boolean {
         for (i in 0 until BOARD_SIZE) {
             for (j in 0 until BOARD_SIZE) {
                 if (data[i][j] != null && data[i][j]!!.color == color) {

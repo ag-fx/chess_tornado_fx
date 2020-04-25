@@ -5,7 +5,13 @@ import com.wooftown.core.pieces.PieceColor
 import com.wooftown.gui.DeskGUI
 import javafx.scene.paint.Color
 
-class Controller(private val desk: DeskGUI) {
+class Controller() {
+
+    private lateinit var desk : DeskGUI
+
+    fun setDeskPointer(deskGUI: DeskGUI) {
+        desk = deskGUI
+    }
 
     private var lastChosenPieceMovies = mutableListOf<Pair<Int, Int>>()
 
