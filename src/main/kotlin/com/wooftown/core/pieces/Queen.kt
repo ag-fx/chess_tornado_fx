@@ -1,5 +1,7 @@
 package com.wooftown.core.pieces
 
+import com.wooftown.core.BOARD_SIZE
+
 /**
  * Queen
  * Extends Piece
@@ -18,7 +20,7 @@ class Queen(color: PieceColor) : Piece(color) {
         for ((directionX, directionY) in listOf(1 to 1, 1 to 0, 1 to -1, 0 to -1, -1 to -1, -1 to 0, -1 to 1, 0 to 1)) {
             var newX = x + directionX
             var newY = y + directionY
-            while (newX in 0..7 && newY in 0..7 && isOpposite((board[newX, newY]))) {
+            while (newX in 0 until BOARD_SIZE && newY in 0 until BOARD_SIZE && isOpposite((board[newX, newY]))) {
                 result.add(Pair(newX, newY))
                 if ((board[newX, newY]) is Piece) {
                     break

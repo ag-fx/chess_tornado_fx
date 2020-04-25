@@ -1,5 +1,7 @@
 package com.wooftown.core.pieces
 
+import com.wooftown.core.BOARD_SIZE
+
 /**
  * Pawn
  * Extends Piece
@@ -36,20 +38,20 @@ class Pawn(color: PieceColor) : Piece(color) {
             result.add(Pair(x + direction, y))
         }
 
-        if (y + 1 in 0..7 && board[x, y + 1] is Pawn && (board[x, y + 1] as Pawn).moveDouble && isOpposite(board[x, y + 1])) {
+        if (y + 1 in 0 until BOARD_SIZE && board[x, y + 1] is Pawn && (board[x, y + 1] as Pawn).moveDouble && isOpposite(board[x, y + 1])) {
             if (board[x + direction, y + 1] == null) {
                 result.add(x + direction to y + 1)
             }
         }
-        if (y - 1 in 0..7 && board[x, y - 1] is Pawn && (board[x, y - 1] as Pawn).moveDouble && isOpposite(board[x, y - 1])) {
+        if (y - 1 in 0 until BOARD_SIZE && board[x, y - 1] is Pawn && (board[x, y - 1] as Pawn).moveDouble && isOpposite(board[x, y - 1])) {
             if (board[x + direction, y - 1] == null) {
                 result.add(x + direction to y - 1)
             }
         }
-        if (x + direction in 0..7 && y + 1 in 0..7 && board[x + direction, y + 1] is Piece && isOpposite(board[x + direction, y + 1])) {
+        if (x + direction in 0 until BOARD_SIZE && y + 1 in 0 until BOARD_SIZE && board[x + direction, y + 1] is Piece && isOpposite(board[x + direction, y + 1])) {
             result.add(Pair(x + direction, y + 1))
         }
-        if (x + direction in 0..7 && y - 1 in 0..7 && board[x + direction, y - 1] is Piece && isOpposite(board[x + direction, y - 1])) {
+        if (x + direction in 0 until BOARD_SIZE && y - 1 in 0 until BOARD_SIZE && board[x + direction, y - 1] is Piece && isOpposite(board[x + direction, y - 1])) {
             result.add(Pair(x + direction, y - 1))
         }
         return result

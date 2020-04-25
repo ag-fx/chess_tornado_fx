@@ -11,7 +11,7 @@ open class ChessBoard : Board<Piece?> {
     /**
      * Out gaming desk
      */
-    private val data = List(8) { MutableList<Piece?>(8) { null } }
+    private val data = List(BOARD_SIZE) { MutableList<Piece?>(BOARD_SIZE) { null } }
 
     /**
      * Cords of white king , uses for castles
@@ -49,7 +49,7 @@ open class ChessBoard : Board<Piece?> {
      * @param value
      */
     override fun set(x: Int, y: Int, value: Piece?) {
-        require(x in 0..7 && y in 0..7)
+        require(x in 0 until BOARD_SIZE && y in 0 until BOARD_SIZE)
         data[x][y] = value
         if (value is Piece) {
             value.setBoard(this)
@@ -68,8 +68,8 @@ open class ChessBoard : Board<Piece?> {
      * Clear desk
      */
     open fun clear() {
-        for (i in 0..7) {
-            for (j in 0..7) {
+        for (i in 0 until BOARD_SIZE) {
+            for (j in 0 until BOARD_SIZE) {
                 data[i][j] = null
             }
         }
@@ -81,8 +81,8 @@ open class ChessBoard : Board<Piece?> {
      */
     private fun kingUnderAttack(color: PieceColor): Boolean {
         val king = getKing(color)
-        for (i in 0..7) {
-            for (j in 0..7) {
+        for (i in 0 until BOARD_SIZE) {
+            for (j in 0 until BOARD_SIZE) {
                 if (data[i][j] != null && data[i][j]!!.color != color) {
                     if (king in data[i][j]!!.getPossibleMovies(i, j)) {
                         return true
@@ -128,8 +128,8 @@ open class ChessBoard : Board<Piece?> {
                 return null
             }
         }
-        for (i in 0..7) {
-            for (j in 0..7) {
+        for (i in 0 until BOARD_SIZE) {
+            for (j in 0 until BOARD_SIZE) {
                 if (data[i][j] != null && data[i][j]!!.color == castledColor) {
                     if (getPossibleMovies(i, j).size > 1) {
                         return null
