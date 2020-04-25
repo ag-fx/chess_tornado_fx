@@ -58,6 +58,20 @@ class MainView : View("TornadoChess") {
                                 this@MainView.close()
                             }
                         }
+                        menu("Theme") {
+                            item("Classic").action {
+                                desk.setStyle(PieceStyles.CLASSIC)
+                            }
+                            item("Berlin").action {
+                                desk.setStyle(PieceStyles.BERLIN)
+                            }
+                            item("Metro").action {
+                                desk.setStyle(PieceStyles.METRO)
+                            }
+                            item("Chess24").action {
+                                desk.setStyle(PieceStyles.CHESS24)
+                            }
+                        }
                     }
                     borderpane {
                         center {

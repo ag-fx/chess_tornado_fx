@@ -55,7 +55,7 @@ class PiecesTest {
             desk[7, 5] = King(PieceColor.WHITE)
             desk[6, 5] = King(PieceColor.WHITE)
             desk[6, 3] = King(PieceColor.WHITE)
-            assertEquals(listOf<Pair<Int, Int>>(), desk[7, 4]!!.getPossibleMovies(7, 4).drop(1).toSet())
+            assertEquals(setOf<Pair<Int, Int>>(), desk[7, 4]!!.getPossibleMovies(7, 4).drop(1).toSet())
         }
 
         @Test

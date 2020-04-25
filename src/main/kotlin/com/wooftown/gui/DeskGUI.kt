@@ -1,5 +1,6 @@
 package com.wooftown.gui
 
+import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.ChessBoard
 import com.wooftown.core.pieces.*
 import javafx.scene.image.Image
@@ -17,10 +18,43 @@ class DeskGUI : ChessBoard() {
      * List of cells for changing their
      */
     private lateinit var cells: List<List<Rectangle>>
+
     /**
      * List of images for changing their
      */
     private lateinit var images: List<List<ImageView>>
+
+    /**
+     * Pieces style
+     */
+    private var style = "classic"
+
+    /**
+     * Set style
+     */
+    fun setStyle(newStyle: PieceStyles) {
+        style = when (newStyle) {
+            PieceStyles.CLASSIC -> "classic"
+            PieceStyles.BERLIN -> "berlin"
+            PieceStyles.METRO -> "metro"
+            PieceStyles.CHESS24 -> "chess24"
+        }
+        redrawAll()
+    }
+
+    /**
+     * Change image for new style
+     */
+    private fun redrawAll() {
+        for(row in 0 until BOARD_SIZE){
+            for(column in 0 until BOARD_SIZE){
+                if(this[row,column] is Piece){
+                    setImage(row, column, Image("file:src\\main\\resources\\$style\\${this[row,column]}.png"))
+                }
+            }
+        }
+    }
+
 
     /**
      * Something like init/constructor
@@ -68,7 +102,7 @@ class DeskGUI : ChessBoard() {
      */
     fun spawnPiece(piece: Piece, row: Int, column: Int) {
         this[row, column] = piece
-        setImage(row, column, Image("file:src\\main\\resources\\${piece}.png"))
+        setImage(row, column, Image("file:src\\main\\resources\\$style\\${piece}.png"))
     }
 
     /**
@@ -89,7 +123,7 @@ class DeskGUI : ChessBoard() {
      * @param column - old column of cell
      * @param newRow - new row of cell
      * @param newColumn - new column of cell
-    */
+     */
     fun movePiece(row: Int, column: Int, newRow: Int, newColumn: Int) {
 
         // castling
