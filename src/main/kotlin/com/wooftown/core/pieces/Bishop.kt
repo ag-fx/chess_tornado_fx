@@ -17,7 +17,7 @@ class Bishop(color: PieceColor) : Piece(color) {
      * @return list of possible movies without finding for check
      */
     override fun getPossibleMovies(x: Int, y: Int): List<Pair<Int, Int>> {
-        val result = mutableListOf(x to y)
+        val result = mutableListOf<Pair<Int, Int>>()
         val board = this.getBoard()!!
         for ((directionX, directionY) in listOf(Pair(1, 1), Pair(-1, -1), Pair(-1, 1), Pair(1, -1))) {
             var newX = x + directionX

@@ -25,7 +25,7 @@ class Pawn(color: PieceColor) : Piece(color) {
         } else {
             -1
         }
-        val result = mutableListOf(x to y)
+        val result = mutableListOf<Pair<Int, Int>>()
         val board = this.getBoard()!!
         if (x == 1 && color == PieceColor.BLACK) {
             if (board[x + 2, y] == null)

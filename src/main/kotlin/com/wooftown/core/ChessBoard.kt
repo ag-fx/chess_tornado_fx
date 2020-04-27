@@ -98,8 +98,8 @@ open class ChessBoard{
      * @return list of possible movies WITH finding for check
      */
     fun getPossibleMovies(x: Int, y: Int): List<Pair<Int, Int>> {
-        val result = mutableListOf(x to y)
-        for (move in data[x][y]!!.getPossibleMovies(x, y).toMutableList().drop(1)) {
+        val result = mutableListOf<Pair<Int,Int>>()
+        for (move in (data[x][y]?:return result).getPossibleMovies(x, y).toMutableList()) {
             val piece = this[x, y]
             val otherPiece = this[move.first, move.second]
             this[move.first, move.second] = piece

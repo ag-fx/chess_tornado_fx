@@ -4,6 +4,7 @@ import com.wooftown.controll.DragController
 import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.PieceColor
 import com.wooftown.core.pieces.*
+import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.value.ObservableValue
 import javafx.event.EventHandler
 import javafx.scene.image.Image
@@ -40,12 +41,17 @@ class MainView : View("TornadoChess") {
     /**
      * Last dropped cell
      */
-    private var lastDrop : Pair<Int?,Int?> = null to null
+    private var lastDrop: Pair<Int?, Int?> = null to null
 
     /**
      * Status of game
      */
     private var statusText = text("")
+
+    /**
+     * Status of hints
+     */
+    private var hintsIsOn = SimpleBooleanProperty(false)
 
     init {
         primaryStage.icons.add(Image("file:src\\main\\resources\\icon.png"))
@@ -60,6 +66,9 @@ class MainView : View("TornadoChess") {
                 vbox {
                     menubar {
                         menu("Game") {
+                            item("Hint enabled"){
+                                checkbox("",hintsIsOn)
+                            }
                             item("Restart").action {
                                 restartGame()
                             }
@@ -119,7 +128,9 @@ class MainView : View("TornadoChess") {
 
                                     // EVENT HANDLING!!!!
                                     onDragDetected = EventHandler { event ->
-                                        println("onDragDetected")
+                                        if(hintsIsOn.value && desk[row,column] is Piece && desk[row,column]!!.color == controller.getTurn()) {
+                                            enableHint(row, column)
+                                        }
                                         val db: Dragboard = startDragAndDrop(TransferMode.MOVE)
                                         val content = ClipboardContent()
                                         content.putImage(desk.getImage(row, column))
@@ -143,19 +154,18 @@ class MainView : View("TornadoChess") {
                                         }
                                         event.isDropCompleted = success
                                         event.consume()
-                                        println("dropped at $row $column")
                                     }
 
                                     onDragDone = EventHandler { event ->
+                                        disableHint(row,column)
                                         if (event.transferMode == TransferMode.MOVE) {
-                                            controller.handle(row,column,lastDrop.first,lastDrop.second)
-                                            println("sourse was $row $column")
+                                            controller.handle(row, column, lastDrop.first, lastDrop.second)
                                         }
                                         lastDrop = null to null
                                         updateStatus()
                                         event.consume()
                                     }
-
+                                    // EVENT HANDLING
                                 }
                             }
                         }
@@ -228,6 +238,29 @@ class MainView : View("TornadoChess") {
             spawnPiece(Bishop(PieceColor.WHITE), 7, 2)
         }
     }
+
+    private fun enableHint(row: Int,column : Int ) {
+        for ((x, y) in desk.getPossibleMovies(row,column)) {
+            if ((x + y) % 2 == 0) {
+                desk.setCellColor(x, y, Color.rgb(175, 237, 173))
+            } else {
+                desk.setCellColor(x, y, Color.rgb(109, 181, 99))
+
+            }
+        }
+    }
+
+    private fun disableHint( row : Int , column : Int ) {
+        for ((x, y) in desk.getPossibleMovies(row,column)) {
+            if ((x + y) % 2 == 0) {
+                desk.setCellColor(x, y, Color.rgb(240, 217, 181))
+            } else {
+                desk.setCellColor(x, y, Color.rgb(181, 136, 99))
+            }
+
+        }
+    }
+
 }
 
 
