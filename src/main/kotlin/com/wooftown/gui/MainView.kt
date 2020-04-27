@@ -58,17 +58,20 @@ class MainView : View("TornadoChess") {
         setWindowMinSize(800, 850)
 
         // stupid code
-        primaryStage.widthProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.height = t1.toDouble().plus(35) }
-        primaryStage.heightProperty().addListener { _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.width = t1.toDouble().minus(35) }
+        primaryStage.widthProperty().addListener {
+            _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.height = t1.toDouble().plus(35) }
+        primaryStage.heightProperty().addListener {
+            _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.width = t1.toDouble().minus(35) }
 
         with(root) {
             top {
                 vbox {
                     menubar {
                         menu("Game") {
-                            item("Hint enabled"){
-                                checkbox("",hintsIsOn)
+                            item("Hint enabled") {
+                                checkbox("", hintsIsOn)
                             }
+                            separator()
                             item("Restart").action {
                                 restartGame()
                             }
@@ -128,7 +131,8 @@ class MainView : View("TornadoChess") {
 
                                     // EVENT HANDLING!!!!
                                     onDragDetected = EventHandler { event ->
-                                        if(hintsIsOn.value && desk[row,column] is Piece && desk[row,column]!!.color == controller.getTurn()) {
+                                        if (hintsIsOn.value && desk[row, column] is Piece &&
+                                                desk[row, column]!!.color == controller.getTurn()) {
                                             enableHint(row, column)
                                         }
                                         val db: Dragboard = startDragAndDrop(TransferMode.MOVE)
@@ -140,7 +144,7 @@ class MainView : View("TornadoChess") {
 
                                     onDragOver = EventHandler { event ->
                                         if (event.gestureSource != this && event.dragboard.hasImage()) {
-                                            event.acceptTransferModes(*TransferMode.ANY)// без этого никак, как оказалось
+                                            event.acceptTransferModes(*TransferMode.ANY) // без этого никак, как оказалось
                                         }
                                         event.consume()
                                     }
@@ -157,7 +161,7 @@ class MainView : View("TornadoChess") {
                                     }
 
                                     onDragDone = EventHandler { event ->
-                                        disableHint(row,column)
+                                        disableHint(row, column)
                                         if (event.transferMode == TransferMode.MOVE) {
                                             controller.handle(row, column, lastDrop.first, lastDrop.second)
                                         }
@@ -239,8 +243,8 @@ class MainView : View("TornadoChess") {
         }
     }
 
-    private fun enableHint(row: Int,column : Int ) {
-        for ((x, y) in desk.getPossibleMovies(row,column)) {
+    private fun enableHint(row: Int, column: Int) {
+        for ((x, y) in desk.getPossibleMovies(row, column)) {
             if ((x + y) % 2 == 0) {
                 desk.setCellColor(x, y, Color.rgb(175, 237, 173))
             } else {
@@ -250,8 +254,8 @@ class MainView : View("TornadoChess") {
         }
     }
 
-    private fun disableHint( row : Int , column : Int ) {
-        for ((x, y) in desk.getPossibleMovies(row,column)) {
+    private fun disableHint(row: Int, column: Int) {
+        for ((x, y) in desk.getPossibleMovies(row, column)) {
             if ((x + y) % 2 == 0) {
                 desk.setCellColor(x, y, Color.rgb(240, 217, 181))
             } else {
