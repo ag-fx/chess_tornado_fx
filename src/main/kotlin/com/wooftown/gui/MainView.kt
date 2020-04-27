@@ -1,20 +1,24 @@
 package com.wooftown.gui
 
-import com.wooftown.controll.Controller
+import com.wooftown.controll.DragController
 import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.PieceColor
 import com.wooftown.core.pieces.*
 import javafx.beans.value.ObservableValue
+import javafx.event.EventHandler
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import javafx.scene.input.ClipboardContent
+import javafx.scene.input.DragEvent
+import javafx.scene.input.Dragboard
+import javafx.scene.input.TransferMode
 import javafx.scene.layout.BorderPane
 import javafx.scene.paint.Color
 import javafx.scene.shape.Rectangle
 import javafx.scene.text.Font
 import tornadofx.*
 
-//Либо я делаю лейтинит поля в классе деск и потом их заполняю через метод
-//Либо я делаю сам деск лейтинит и иницилизирую его через конструктор,но тогда поле в контроллере будет лейтинит
+
 /**
  * Main game view
  */
@@ -27,12 +31,13 @@ class MainView : View("TornadoChess") {
     /**
      * Gaming desk
      */
-    private lateinit var desk : DeskGUI
+    private lateinit var desk: DeskGUI
 
     /**
      * Controller
      */
-    private val controller = Controller()
+    //private val controller = Controller()
+    private val controller = DragController()
 
     /**
      * Status of game
@@ -87,7 +92,7 @@ class MainView : View("TornadoChess") {
             }
             center {
                 gridpane {
-                    val setUpCells = List(BOARD_SIZE) { MutableList(BOARD_SIZE) {Rectangle()} }
+                    val setUpCells = List(BOARD_SIZE) { MutableList(BOARD_SIZE) { Rectangle() } }
                     val setUpImages = List(BOARD_SIZE) { MutableList(BOARD_SIZE) { ImageView() } }
                     for (row in 0 until BOARD_SIZE) {
                         row {
@@ -110,16 +115,86 @@ class MainView : View("TornadoChess") {
                                         fitWidthProperty().bind(fitHeightProperty())
                                         // pref size 80
                                     }
-                                     setOnMouseClicked {
-                                        controller.handle(row, column)
-                                        updateStatus()
+                                    /*  setOnDragEntered {event->
+                                          println("setOnDragEntered $row $column")
+                                          event.consume()
+                                      }
+                                      setOnDragExited {event->
+                                          println(" setOnDragExited $row $column")
+                                          event.consume()
+                                      }
+                                      setOnDragDropped {event->
+                                          println("setOnDragDropped $row $column")
+                                          event.consume()
+                                      }
+                                        setOnDragDetected {
+                                           println("setOnDragDetected $row $column")
+                                           controller.setStart(row,column)
+                                           val db = this.startDragAndDrop(*TransferMode.ANY)
+                                           val content = ClipboardContent()
+                                           content.putImage(desk.getImage(row, column))
+                                           db.setContent(content)
+                                           it.consume()
+                                       }
+                                          */
+                                    onDragDetected = EventHandler { event ->
+                                        println("onDragDetected")
+                                        val db: Dragboard = startDragAndDrop(TransferMode.MOVE)
+                                        val content = ClipboardContent()
+                                        content.putImage(desk.getImage(row, column))
+                                        db.setContent(content)
+                                        event.consume()
                                     }
+
+                                    onDragOver = EventHandler { event ->
+                                        //println("onDragOver")
+                                        if (event.gestureSource != this &&
+                                                event.dragboard.hasImage()) {
+                                            println("onDragOveresl at $row $column")
+                                            event.acceptTransferModes(*TransferMode.ANY)
+                                        }
+                                        event.consume()
+                                    }
+
+                                    onDragEntered = EventHandler { event ->
+                                        println("onDragEntered at $row $column")
+                                        if (event.gestureSource != this &&
+                                                event.dragboard.hasImage()) {
+                                            println("onDragenteredysl")
+                                        }
+                                        event.consume()
+                                    }
+
+                                    onDragExited = EventHandler { event ->
+
+                                        event.consume()
+                                    }
+
+                                    onDragDropped = EventHandler { event ->
+                                        println("onDragDropped $row $column")
+                                        val db = event.dragboard
+                                        var success = false
+                                        if (db.hasImage()) {
+                                            success = true
+                                            println("onDragDroppedysl")
+                                        }
+                                        event.isDropCompleted = success
+                                        event.consume()
+                                    }
+                                    onDragDone = EventHandler { event ->
+                                        println("onDragDone")
+                                        if (event.transferMode == TransferMode.MOVE) {
+                                            println("sourse was $row $column")
+                                        }
+                                        event.consume()
+                                    }
+
 
                                 }
                             }
                         }
                     }
-                    desk = DeskGUI(setUpCells,setUpImages)
+                    desk = DeskGUI(setUpCells, setUpImages)
                     controller.setDeskPointer(desk)
                 }
             }
@@ -188,5 +263,6 @@ class MainView : View("TornadoChess") {
         }
     }
 }
+
 
 

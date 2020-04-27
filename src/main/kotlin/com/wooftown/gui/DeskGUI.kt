@@ -62,7 +62,7 @@ class DeskGUI(private val cells: List<List<Rectangle>> ,
      * @param column - column of cell
      * @return image?
      */
-    private fun getImage(row: Int, column: Int): Image? = images[row][column].image
+    fun getImage(row: Int, column: Int): Image? = images[row][column].image
 
     /**
      * Change color of this cell
