@@ -12,40 +12,21 @@ class DragController() {
         desk = deskGUI
     }
 
-    private var lastChosenPieceMovies = mutableListOf<Pair<Int, Int>>()
-
     private var turnNow = PieceColor.WHITE
 
     fun getTurn() = turnNow
 
-    private lateinit var start : Pair<Int,Int>
-
-    private lateinit var end : Pair<Int,Int>
-
-    fun setStart(row : Int,column:Int){
-        start = row to column
-    }
-
-    fun setEnd(row: Int,column: Int){
-        end = row to column
-    }
-
-    fun handle() {
-        if (desk[start.first, start.second] is Piece && desk[start.first, start.second]!!.color == turnNow) {
-            lastChosenPieceMovies = desk.getPossibleMovies(start.first, start.second).toMutableList()
-            if ( end.first to end.second in lastChosenPieceMovies.drop(1)) {
-                val oldRow = lastChosenPieceMovies.first().first
-                val oldColumn = lastChosenPieceMovies.first().second
-                lastChosenPieceMovies.removeAt(0)
-                desk.movePiece(oldRow, oldColumn, end.first, end.second)
+    fun handle(fromRow : Int , fromColumn : Int, toRow : Int? , toColumn: Int?) {
+        if(toRow == null || toColumn == null){
+            return
+        }
+        if(desk[fromRow,fromColumn] is Piece && desk[fromRow,fromColumn]!!.color == turnNow){
+            if(toRow to toColumn in desk.getPossibleMovies(fromRow,fromColumn)){
+                desk.movePiece(fromRow,fromColumn,toRow,toColumn)
                 turnNow = turnNow.opposite()
-                lastChosenPieceMovies.clear()
-                return
             }
         }
-
     }
-
 
     fun clear() {
         desk.clear()

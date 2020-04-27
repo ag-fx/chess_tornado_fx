@@ -9,7 +9,6 @@ import javafx.event.EventHandler
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.input.ClipboardContent
-import javafx.scene.input.DragEvent
 import javafx.scene.input.Dragboard
 import javafx.scene.input.TransferMode
 import javafx.scene.layout.BorderPane
@@ -36,8 +35,12 @@ class MainView : View("TornadoChess") {
     /**
      * Controller
      */
-    //private val controller = Controller()
     private val controller = DragController()
+
+    /**
+     * Last dropped cell
+     */
+    private var lastDrop : Pair<Int?,Int?> = null to null
 
     /**
      * Status of game
@@ -106,37 +109,15 @@ class MainView : View("TornadoChess") {
                                         }
                                         widthProperty().bind(root.widthProperty().divide(BOARD_SIZE))
                                         heightProperty().bind(widthProperty() - 5)
-                                        // pref size 100
                                     }
 
                                     setUpImages[row][column] = imageview {
                                         fitHeightProperty().bind(
                                                 setUpCells[row][column].heightProperty() / 14 * BOARD_SIZE)
                                         fitWidthProperty().bind(fitHeightProperty())
-                                        // pref size 80
                                     }
-                                    /*  setOnDragEntered {event->
-                                          println("setOnDragEntered $row $column")
-                                          event.consume()
-                                      }
-                                      setOnDragExited {event->
-                                          println(" setOnDragExited $row $column")
-                                          event.consume()
-                                      }
-                                      setOnDragDropped {event->
-                                          println("setOnDragDropped $row $column")
-                                          event.consume()
-                                      }
-                                        setOnDragDetected {
-                                           println("setOnDragDetected $row $column")
-                                           controller.setStart(row,column)
-                                           val db = this.startDragAndDrop(*TransferMode.ANY)
-                                           val content = ClipboardContent()
-                                           content.putImage(desk.getImage(row, column))
-                                           db.setContent(content)
-                                           it.consume()
-                                       }
-                                          */
+
+                                    // EVENT HANDLING!!!!
                                     onDragDetected = EventHandler { event ->
                                         println("onDragDetected")
                                         val db: Dragboard = startDragAndDrop(TransferMode.MOVE)
@@ -147,48 +128,33 @@ class MainView : View("TornadoChess") {
                                     }
 
                                     onDragOver = EventHandler { event ->
-                                        //println("onDragOver")
-                                        if (event.gestureSource != this &&
-                                                event.dragboard.hasImage()) {
-                                            println("onDragOveresl at $row $column")
-                                            event.acceptTransferModes(*TransferMode.ANY)
+                                        if (event.gestureSource != this && event.dragboard.hasImage()) {
+                                            event.acceptTransferModes(*TransferMode.ANY)// без этого никак, как оказалось
                                         }
-                                        event.consume()
-                                    }
-
-                                    onDragEntered = EventHandler { event ->
-                                        println("onDragEntered at $row $column")
-                                        if (event.gestureSource != this &&
-                                                event.dragboard.hasImage()) {
-                                            println("onDragenteredysl")
-                                        }
-                                        event.consume()
-                                    }
-
-                                    onDragExited = EventHandler { event ->
-
                                         event.consume()
                                     }
 
                                     onDragDropped = EventHandler { event ->
-                                        println("onDragDropped $row $column")
                                         val db = event.dragboard
                                         var success = false
                                         if (db.hasImage()) {
                                             success = true
-                                            println("onDragDroppedysl")
+                                            lastDrop = row to column
                                         }
                                         event.isDropCompleted = success
                                         event.consume()
-                                    }
-                                    onDragDone = EventHandler { event ->
-                                        println("onDragDone")
-                                        if (event.transferMode == TransferMode.MOVE) {
-                                            println("sourse was $row $column")
-                                        }
-                                        event.consume()
+                                        println("dropped at $row $column")
                                     }
 
+                                    onDragDone = EventHandler { event ->
+                                        if (event.transferMode == TransferMode.MOVE) {
+                                            controller.handle(row,column,lastDrop.first,lastDrop.second)
+                                            println("sourse was $row $column")
+                                        }
+                                        lastDrop = null to null
+                                        updateStatus()
+                                        event.consume()
+                                    }
 
                                 }
                             }
