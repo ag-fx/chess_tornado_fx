@@ -3,7 +3,10 @@ package com.wooftown.gui
 import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.ChessBoard
 import com.wooftown.core.PieceColor
-import com.wooftown.core.pieces.*
+import com.wooftown.core.pieces.King
+import com.wooftown.core.pieces.Pawn
+import com.wooftown.core.pieces.Piece
+import com.wooftown.core.pieces.Queen
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.paint.Color
@@ -17,8 +20,8 @@ import kotlin.math.abs
  * @param cells - List of cells for changing their
  * @param images - List of images for changing their
  */
-class DeskGUI(private val cells: List<List<Rectangle>> ,
-              private val images: List<List<ImageView>> ) : ChessBoard() {
+class DeskGUI(private val cells: List<List<Rectangle>>,
+              private val images: List<List<ImageView>>) : ChessBoard() {
     /**
      * Pieces style
      */
@@ -36,10 +39,10 @@ class DeskGUI(private val cells: List<List<Rectangle>> ,
      * Change image for new style
      */
     private fun redrawAll() {
-        for(row in 0 until BOARD_SIZE){
-            for(column in 0 until BOARD_SIZE){
-                if(this[row,column] is Piece){
-                    setImage(row, column, Image("file:src\\main\\resources\\$style\\${this[row,column]}.png"))
+        for (row in 0 until BOARD_SIZE) {
+            for (column in 0 until BOARD_SIZE) {
+                if (this[row, column] is Piece) {
+                    setImage(row, column, Image("file:src\\main\\resources\\$style\\${this[row, column]}.png"))
                 }
             }
         }
@@ -52,7 +55,7 @@ class DeskGUI(private val cells: List<List<Rectangle>> ,
      * @param column - column of cell
      * @param image - new image
      */
-    private fun setImage(row: Int, column: Int, image: Image?) {
+    fun setImage(row: Int, column: Int, image: Image?) {
         images[row][column].image = image
     }
 

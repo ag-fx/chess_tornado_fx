@@ -59,9 +59,12 @@ class MainView : View("TornadoChess") {
 
         // stupid code
         primaryStage.widthProperty().addListener {
-            _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.height = t1.toDouble().plus(35) }
+            _: ObservableValue<out Number?>?, _: Number?,
+            t1: Number -> primaryStage.height = t1.toDouble().plus(35) }
+
         primaryStage.heightProperty().addListener {
-            _: ObservableValue<out Number?>?, _: Number?, t1: Number -> primaryStage.width = t1.toDouble().minus(35) }
+            _: ObservableValue<out Number?>?, _: Number?,
+            t1: Number -> primaryStage.width = t1.toDouble().minus(35) }
 
         with(root) {
             top {
@@ -139,6 +142,8 @@ class MainView : View("TornadoChess") {
                                         val content = ClipboardContent()
                                         content.putImage(desk.getImage(row, column))
                                         db.setContent(content)
+                                        // чтобы фигурка пропадала со своей клетки когда ее берут
+                                        desk.setImage(row, column, null)
                                         event.consume()
                                     }
 
@@ -162,6 +167,8 @@ class MainView : View("TornadoChess") {
 
                                     onDragDone = EventHandler { event ->
                                         disableHint(row, column)
+                                        val db = event.dragboard
+                                        desk.setImage(row, column, db.image)
                                         if (event.transferMode == TransferMode.MOVE) {
                                             controller.handle(row, column, lastDrop.first, lastDrop.second)
                                         }
