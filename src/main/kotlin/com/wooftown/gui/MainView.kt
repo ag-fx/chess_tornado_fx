@@ -123,12 +123,12 @@ class MainView : View("TornadoChess") {
                                             Color.rgb(181, 136, 99)
                                         }
                                         widthProperty().bind(root.widthProperty().divide(BOARD_SIZE))
-                                        heightProperty().bind(widthProperty() - 5)
+                                        heightProperty().bind(widthProperty() - 4)
                                     }
 
                                     setUpImages[row][column] = imageview {
                                         fitHeightProperty().bind(
-                                                setUpCells[row][column].heightProperty() / 14 * BOARD_SIZE)
+                                                setUpCells[row][column].heightProperty() / 11 * BOARD_SIZE)
                                         fitWidthProperty().bind(fitHeightProperty())
                                     }
 
