@@ -7,8 +7,7 @@ import com.wooftown.core.PieceColor
  * abstract description of piece
  * @param color - color of piece
  */
-abstract class Piece(color: PieceColor) {
-    val color: PieceColor = color
+abstract class Piece(val color: PieceColor) {
 
     private var board: ChessBoard? = null
 
@@ -38,5 +37,20 @@ abstract class Piece(color: PieceColor) {
      */
     abstract fun getPossibleMovies(x: Int, y: Int): List<Pair<Int, Int>>
 
-    override fun hashCode(): Int = this.toString().hashCode()
+    // в этом хаш-коде буду равны одинаковые фигуры одного цвета
+    override fun hashCode(): Int = toString().hashCode()
+
+    // idea generated code
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Piece
+
+        if (color != other.color) return false
+        if (board != other.board) return false
+
+        return true
+    }
+
 }

@@ -6,7 +6,7 @@ import com.wooftown.core.pieces.Piece
 /**
  * Chess desk
  */
-open class ChessBoard{
+open class ChessBoard {
     /**
      * Out gaming desk
      */
@@ -82,7 +82,7 @@ open class ChessBoard{
         val king = getKing(color)
         for (i in 0 until BOARD_SIZE) {
             for (j in 0 until BOARD_SIZE) {
-                if (data[i][j] != null && data[i][j]!!.color != color) {
+                if (data[i][j] is Piece && data[i][j]!!.color != color) {
                     if (king in data[i][j]!!.getPossibleMovies(i, j)) {
                         return true
                     }
@@ -98,8 +98,8 @@ open class ChessBoard{
      * @return list of possible movies WITH finding for check
      */
     fun getPossibleMovies(x: Int, y: Int): List<Pair<Int, Int>> {
-        val result = mutableListOf<Pair<Int,Int>>()
-        for (move in (data[x][y]?:return result).getPossibleMovies(x, y).toMutableList()) {
+        val result = mutableListOf<Pair<Int, Int>>()
+        for (move in (data[x][y] ?: return result).getPossibleMovies(x, y).toMutableList()) {
             val piece = this[x, y]
             val otherPiece = this[move.first, move.second]
             this[move.first, move.second] = piece
@@ -129,4 +129,8 @@ open class ChessBoard{
         }
         return true
     }
+
+    override fun hashCode(): Int = data.hashCode()
+
+    override fun equals(other: Any?): Boolean = other is ChessBoard && other.data == this.data
 }

@@ -31,4 +31,10 @@ class DragController {
         desk.clear()
         turnNow = PieceColor.WHITE
     }
+
+    override fun hashCode(): Int = desk.hashCode() * 31 + turnNow.hashCode()
+
+    override fun equals(other: Any?): Boolean = other is DragController
+            && desk == other.desk
+            && turnNow == other.turnNow
 }
