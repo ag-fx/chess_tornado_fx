@@ -1,7 +1,6 @@
 package com.wooftown.gui
 
 import com.wooftown.controll.DragController
-import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.PieceColor
 import com.wooftown.core.pieces.*
 import javafx.beans.property.SimpleBooleanProperty
@@ -23,6 +22,12 @@ import tornadofx.*
  * Main game view
  */
 class MainView : View("TornadoChess") {
+    /**
+     * Desk Size
+     */
+
+    private val deskSize = 8
+
     /**
      * Core parent
      */
@@ -110,11 +115,11 @@ class MainView : View("TornadoChess") {
             }
             center {
                 gridpane {
-                    val setUpCells = List(BOARD_SIZE) { MutableList(BOARD_SIZE) { Rectangle() } }
-                    val setUpImages = List(BOARD_SIZE) { MutableList(BOARD_SIZE) { ImageView() } }
-                    for (row in 0 until BOARD_SIZE) {
+                    val setUpCells = List(deskSize) { MutableList(deskSize) { Rectangle() } }
+                    val setUpImages = List(deskSize) { MutableList(deskSize) { ImageView() } }
+                    for (row in 0 until deskSize) {
                         row {
-                            for (column in 0 until BOARD_SIZE) {
+                            for (column in 0 until deskSize) {
                                 stackpane {
                                     setUpCells[row][column] = rectangle {
                                         fill = if ((row + column) % 2 == 0) {
@@ -122,13 +127,13 @@ class MainView : View("TornadoChess") {
                                         } else {
                                             Color.rgb(181, 136, 99)
                                         }
-                                        widthProperty().bind(root.widthProperty().divide(BOARD_SIZE))
+                                        widthProperty().bind(root.widthProperty().divide(deskSize))
                                         heightProperty().bind(widthProperty() - 4)
                                     }
 
                                     setUpImages[row][column] = imageview {
                                         fitHeightProperty().bind(
-                                                setUpCells[row][column].heightProperty() / 11 * BOARD_SIZE)
+                                                setUpCells[row][column].heightProperty() / 11 * deskSize)
                                         fitWidthProperty().bind(fitHeightProperty())
                                     }
 
@@ -181,7 +186,7 @@ class MainView : View("TornadoChess") {
                             }
                         }
                     }
-                    desk = DeskGUI(setUpCells, setUpImages)
+                    desk = DeskGUI(setUpCells, setUpImages,deskSize)
                     controller.setDeskPointer(desk)
                 }
             }
@@ -227,7 +232,7 @@ class MainView : View("TornadoChess") {
      */
     private fun spawnAllPieces() {
         with(desk) {
-            for (column in 0 until BOARD_SIZE) {
+            for (column in 0 until deskSize) {
                 spawnPiece(Pawn(PieceColor.BLACK), 1, column)
                 spawnPiece(Pawn(PieceColor.WHITE), 6, column)
             }

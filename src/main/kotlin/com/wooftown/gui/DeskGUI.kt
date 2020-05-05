@@ -1,6 +1,5 @@
 package com.wooftown.gui
 
-import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.ChessBoard
 import com.wooftown.core.PieceColor
 import com.wooftown.core.pieces.King
@@ -21,7 +20,7 @@ import kotlin.math.abs
  * @param images - List of images for changing their
  */
 class DeskGUI(private val cells: List<List<Rectangle>>,
-              private val images: List<List<ImageView>>) : ChessBoard() {
+              private val images: List<List<ImageView>>,size : Int) : ChessBoard(size) {
     /**
      * Pieces style
      */
@@ -39,8 +38,8 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
      * Change image for new style
      */
     private fun redrawAll() {
-        for (row in 0 until BOARD_SIZE) {
-            for (column in 0 until BOARD_SIZE) {
+        for (row in 0 until getSize()) {
+            for (column in 0 until getSize()) {
                 if (this[row, column] is Piece) {
                     setImage(row, column, Image("file:src\\main\\resources\\$style\\${this[row, column]}.png"))
                 }
@@ -129,6 +128,7 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
         setImage(newRow, newColumn, getImage(row, column))
         setImage(row, column, null)
         // changing to queen
+
         //el passant
         if (this[newRow, newColumn] is Pawn) {
 

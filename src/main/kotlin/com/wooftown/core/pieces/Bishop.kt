@@ -1,6 +1,5 @@
 package com.wooftown.core.pieces
 
-import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.PieceColor
 
 
@@ -22,7 +21,7 @@ class Bishop(color: PieceColor) : Piece(color) {
         for ((directionX, directionY) in listOf(Pair(1, 1), Pair(-1, -1), Pair(-1, 1), Pair(1, -1))) {
             var newX = x + directionX
             var newY = y + directionY
-            while (newX in 0 until BOARD_SIZE && newY in 0 until BOARD_SIZE && isOpposite(board[newX, newY])) {
+            while (newX in 0 until board.getSize() && newY in 0 until board.getSize() && isOpposite(board[newX, newY])) {
                 result.add(Pair(newX, newY))
                 if (board[newX, newY] is Piece) {
                     break

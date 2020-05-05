@@ -5,7 +5,7 @@ import org.junit.Assert.*
 import org.junit.Test
 
 
-val desk = ChessBoard()
+val desk = ChessBoard(8)
 fun movies(x: Int, y: Int) = desk[x, y]!!.getPossibleMovies(x, y).toSet()
 
 fun squares(list: List<String>): Set<Pair<Int, Int>> {

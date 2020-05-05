@@ -1,6 +1,5 @@
 package com.wooftown.core.pieces
 
-import com.wooftown.core.BOARD_SIZE
 import com.wooftown.core.PieceColor
 
 /**
@@ -21,7 +20,7 @@ class Knight(color: PieceColor) : Piece(color) {
         for ((directionX, directionY) in listOf(2 to 1, 2 to -1, 1 to 2, 1 to -2, -1 to 2, -1 to -2, -2 to 1, -2 to -1)) {
             val newX = x + directionX
             val newY = y + directionY
-            if (newX in 0 until BOARD_SIZE && newY in 0 until BOARD_SIZE && isOpposite(board[newX, newY])) {
+            if (newX in 0 until board.getSize() && newY in 0 until board.getSize() && isOpposite(board[newX, newY])) {
                 result.add(Pair(newX, newY))
             }
         }

@@ -6,11 +6,13 @@ import com.wooftown.core.pieces.Piece
 /**
  * Chess desk
  */
-open class ChessBoard {
+open class ChessBoard(private val size : Int) {
+
+    fun getSize() = size
     /**
      * Out gaming desk
      */
-    private val data = List(BOARD_SIZE) { MutableList<Piece?>(BOARD_SIZE) { null } }
+    private val data = List(size) { MutableList<Piece?>(size) { null } }
 
     /**
      * Cords of white king , uses for castles
@@ -48,7 +50,7 @@ open class ChessBoard {
      * @param value
      */
     operator fun set(x: Int, y: Int, value: Piece?) {
-        require(x in 0 until BOARD_SIZE && y in 0 until BOARD_SIZE)
+        require(x in 0 until size && y in 0 until size)
         data[x][y] = value
         if (value is Piece) {
             value.setBoard(this)
@@ -67,8 +69,8 @@ open class ChessBoard {
      * Clear desk
      */
     open fun clear() {
-        for (i in 0 until BOARD_SIZE) {
-            for (j in 0 until BOARD_SIZE) {
+        for (i in 0 until size) {
+            for (j in 0 until size) {
                 data[i][j] = null
             }
         }
@@ -80,8 +82,8 @@ open class ChessBoard {
      */
     private fun isCheck(color: PieceColor): Boolean {
         val king = getKing(color)
-        for (i in 0 until BOARD_SIZE) {
-            for (j in 0 until BOARD_SIZE) {
+        for (i in 0 until size) {
+            for (j in 0 until size) {
                 if (data[i][j] is Piece && data[i][j]!!.color != color) {
                     if (king in data[i][j]!!.getPossibleMovies(i, j)) {
                         return true
@@ -118,8 +120,8 @@ open class ChessBoard {
      * @return color of looser
      */
     fun isLooser(color: PieceColor): Boolean {
-        for (i in 0 until BOARD_SIZE) {
-            for (j in 0 until BOARD_SIZE) {
+        for (i in 0 until size) {
+            for (j in 0 until size) {
                 if (data[i][j] != null && data[i][j]!!.color == color) {
                     if (getPossibleMovies(i, j).size > 1) {
                         return false
