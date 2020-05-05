@@ -8,6 +8,7 @@ enum class PieceColor {
      * White piece
      */
     WHITE,
+
     /**
      * Black piece
      */

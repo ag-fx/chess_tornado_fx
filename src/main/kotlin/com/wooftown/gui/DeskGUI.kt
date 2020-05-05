@@ -20,7 +20,7 @@ import kotlin.math.abs
  * @param images - List of images for changing their
  */
 class DeskGUI(private val cells: List<List<Rectangle>>,
-              private val images: List<List<ImageView>>,size : Int) : ChessBoard(size) {
+              private val images: List<List<ImageView>>, size: Int) : ChessBoard(size) {
     /**
      * Pieces style
      */

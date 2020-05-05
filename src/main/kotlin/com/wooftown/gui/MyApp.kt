@@ -5,4 +5,4 @@ import tornadofx.*
 /**
  * App =)
  */
-class MyApp: App(MainView::class)
+class MyApp : App(MainView::class)

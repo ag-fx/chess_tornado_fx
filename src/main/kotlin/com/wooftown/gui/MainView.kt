@@ -63,13 +63,15 @@ class MainView : View("TornadoChess") {
         setWindowMinSize(800, 850)
 
         // stupid code
-        primaryStage.widthProperty().addListener {
-            _: ObservableValue<out Number?>?, _: Number?,
-            t1: Number -> primaryStage.height = t1.toDouble().plus(35) }
+        primaryStage.widthProperty().addListener { _: ObservableValue<out Number?>?, _: Number?,
+                                                   t1: Number ->
+            primaryStage.height = t1.toDouble().plus(35)
+        }
 
-        primaryStage.heightProperty().addListener {
-            _: ObservableValue<out Number?>?, _: Number?,
-            t1: Number -> primaryStage.width = t1.toDouble().minus(35) }
+        primaryStage.heightProperty().addListener { _: ObservableValue<out Number?>?, _: Number?,
+                                                    t1: Number ->
+            primaryStage.width = t1.toDouble().minus(35)
+        }
 
         with(root) {
             top {
@@ -186,7 +188,7 @@ class MainView : View("TornadoChess") {
                             }
                         }
                     }
-                    desk = DeskGUI(setUpCells, setUpImages,deskSize)
+                    desk = DeskGUI(setUpCells, setUpImages, deskSize)
                     controller.setDeskPointer(desk)
                 }
             }

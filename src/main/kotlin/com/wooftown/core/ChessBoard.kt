@@ -6,9 +6,10 @@ import com.wooftown.core.pieces.Piece
 /**
  * Chess desk
  */
-open class ChessBoard(private val size : Int) {
+open class ChessBoard(private val size: Int) {
 
     fun getSize() = size
+
     /**
      * Out gaming desk
      */
