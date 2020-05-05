@@ -19,6 +19,25 @@ fun squares(list: List<String>): Set<Pair<Int, Int>> {
 class PiecesTest {
 
     @Test
+    fun toStringTest(){
+        assertEquals("black_king",King(PieceColor.BLACK).toString())
+        assertEquals("black_knight",Knight(PieceColor.BLACK).toString())
+        assertEquals("black_pawn",Pawn(PieceColor.BLACK).toString())
+        assertEquals("black_queen",Queen(PieceColor.BLACK).toString())
+        assertEquals("black_rook",Rook(PieceColor.BLACK).toString())
+        assertEquals("black_bishop",Bishop(PieceColor.BLACK).toString())
+
+        assertEquals("white_king",King(PieceColor.WHITE).toString())
+        assertEquals("white_knight",Knight(PieceColor.WHITE).toString())
+        assertEquals("white_pawn",Pawn(PieceColor.WHITE).toString())
+        assertEquals("white_queen",Queen(PieceColor.WHITE).toString())
+        assertEquals("white_rook",Rook(PieceColor.WHITE).toString())
+        assertEquals("white_bishop",Bishop(PieceColor.WHITE).toString())
+
+    }
+
+
+    @Test
     fun bishopGetMovies() {
         desk.clear()
         desk[0, 0] = Bishop(PieceColor.BLACK)
