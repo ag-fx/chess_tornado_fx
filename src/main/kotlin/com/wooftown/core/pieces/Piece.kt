@@ -40,7 +40,7 @@ abstract class Piece(val color: PieceColor) {
     // в этом хаш-коде буду равны одинаковые фигуры одного цвета
     override fun hashCode(): Int = toString().hashCode()
 
-    // idea generated code
+    /* idea generated code */
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
@@ -53,4 +53,9 @@ abstract class Piece(val color: PieceColor) {
         return true
     }
 
+    /**
+     * @return string with color and name of piece in format: color_piece
+     * use in view for take images from resources
+     */
+    override fun toString(): String = "${color}_${javaClass.simpleName.toLowerCase()}"
 }

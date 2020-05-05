@@ -108,7 +108,6 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
      * @param newColumn - new column of cell
      */
     fun movePiece(row: Int, column: Int, newRow: Int, newColumn: Int) {
-
         // castling
         if (this[row, column] is King) {
             val castleX = if (this[row, column]!!.color == PieceColor.WHITE) {
@@ -124,13 +123,11 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
                 movePiece(castleX, 7, castleX, 5)
             }
         }
-
         val deleted = this[newRow, newColumn]
         this[newRow, newColumn] = this[row, column]
         this[row, column] = null
         setImage(newRow, newColumn, getImage(row, column))
         setImage(row, column, null)
-
         // changing to queen
         //el passant
         if (this[newRow, newColumn] is Pawn) {
@@ -152,7 +149,6 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
                 }
             }
         }
-
     }
 
     /**

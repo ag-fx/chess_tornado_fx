@@ -55,13 +55,4 @@ class King(color: PieceColor) : Piece(color) {
         return result
     }
 
-    /**
-     * @return string with color and name of piece in format: color_piece
-     * use in view for take images from resources
-     */
-    override fun toString(): String = if (this.color == PieceColor.WHITE) {
-        "white_king"
-    } else {
-        "black_king"
-    }
 }

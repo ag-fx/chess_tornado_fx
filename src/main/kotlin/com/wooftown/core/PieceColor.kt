@@ -21,4 +21,6 @@ enum class PieceColor {
     } else {
         WHITE
     }
+
+    override fun toString() = name.toLowerCase()
 }
