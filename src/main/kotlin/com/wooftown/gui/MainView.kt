@@ -258,7 +258,7 @@ class MainView : View("TornadoChess") {
     }
 
     private fun enableHint(row: Int, column: Int) {
-        for ((x, y) in desk.getPossibleMovies(row, column)) {
+        for ((x, y) in desk.getPossibleMoves(row, column)) {
             if ((x + y) % 2 == 0) {
                 desk.setCellColor(x, y, Color.rgb(175, 237, 173))
             } else {
@@ -269,7 +269,7 @@ class MainView : View("TornadoChess") {
     }
 
     private fun disableHint(row: Int, column: Int) {
-        for ((x, y) in desk.getPossibleMovies(row, column)) {
+        for ((x, y) in desk.getPossibleMoves(row, column)) {
             if ((x + y) % 2 == 0) {
                 desk.setCellColor(x, y, Color.rgb(240, 217, 181))
             } else {

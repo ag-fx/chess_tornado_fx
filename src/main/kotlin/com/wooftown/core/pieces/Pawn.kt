@@ -18,7 +18,7 @@ class Pawn(color: PieceColor) : Piece(color) {
      * @param y - y cords of piece
      * @return list of possible movies without finding for check
      */
-    override fun getPossibleMovies(x: Int, y: Int): List<Pair<Int, Int>> {
+    override fun getPossibleMoves(x: Int, y: Int): List<Pair<Int, Int>> {
 
         val direction = if (color == PieceColor.BLACK) {
             1

@@ -20,7 +20,7 @@ class DragController {
             return
         }
         if (desk[fromRow, fromColumn] is Piece && desk[fromRow, fromColumn]!!.color == turnNow) {
-            if (toRow to toColumn in desk.getPossibleMovies(fromRow, fromColumn)) {
+            if (toRow to toColumn in desk.getPossibleMoves(fromRow, fromColumn)) {
                 desk.movePiece(fromRow, fromColumn, toRow, toColumn)
                 turnNow = turnNow.opposite()
             }

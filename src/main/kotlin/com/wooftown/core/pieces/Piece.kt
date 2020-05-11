@@ -35,7 +35,7 @@ abstract class Piece(val color: PieceColor) {
      * @param y - y cords of piece
      * @return list of possible movies without finding for check
      */
-    abstract fun getPossibleMovies(x: Int, y: Int): List<Pair<Int, Int>>
+    abstract fun getPossibleMoves(x: Int, y: Int): List<Pair<Int, Int>>
 
     // в этом хаш-коде буду равны одинаковые фигуры одного цвета
     override fun hashCode(): Int = toString().hashCode()

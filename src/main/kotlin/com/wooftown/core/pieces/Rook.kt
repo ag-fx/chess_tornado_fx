@@ -15,7 +15,7 @@ class Rook(color: PieceColor) : Piece(color) {
      * @param y - y cords of piece
      * @return list of possible movies without finding for check
      */
-    override fun getPossibleMovies(x: Int, y: Int): List<Pair<Int, Int>> {
+    override fun getPossibleMoves(x: Int, y: Int): List<Pair<Int, Int>> {
         val result = mutableListOf<Pair<Int, Int>>()
         val board = this.getBoard()!!
         for ((directionX, directionY) in listOf(1 to 0, -1 to 0, 0 to 1, 0 to -1)) {

@@ -6,7 +6,7 @@ import org.junit.Test
 
 
 val desk = ChessBoard(8)
-fun movies(x: Int, y: Int) = desk[x, y]!!.getPossibleMovies(x, y).toSet()
+fun movies(x: Int, y: Int) = desk[x, y]!!.getPossibleMoves(x, y).toSet()
 
 fun squares(list: List<String>): Set<Pair<Int, Int>> {
     val result = mutableListOf<Pair<Int, Int>>()
@@ -68,7 +68,7 @@ class PiecesTest {
         desk[7, 5] = King(PieceColor.WHITE)
         desk[6, 5] = King(PieceColor.WHITE)
         desk[6, 3] = King(PieceColor.WHITE)
-        assertEquals(setOf<Pair<Int, Int>>(), desk[7, 4]!!.getPossibleMovies(7, 4).toSet())
+        assertEquals(setOf<Pair<Int, Int>>(), desk[7, 4]!!.getPossibleMoves(7, 4).toSet())
     }
 
     @Test
