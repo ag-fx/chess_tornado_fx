@@ -10,6 +10,8 @@ import com.wooftown.core.PieceColor
  */
 class King(color: PieceColor,board: ChessBoard) : Piece(color,board){
 
+    var walked = false
+
     /**
      * @param x - x cords of piece
      * @param y - y cords of piece
@@ -38,15 +40,15 @@ class King(color: PieceColor,board: ChessBoard) : Piece(color,board){
         val result = mutableListOf<Pair<Int, Int>>()
         val board = this.getBoard()
         val canCastle = if (color == PieceColor.WHITE) {
-            x == 7 && y == 4
+            x == board.getSize() -1 && y == 4 && !walked
         } else {
-            x == 0 && y == 4
+            x == 0 && y == 4 && !walked
         }
         if (canCastle) {
-            if (board[x, 5] == null && board[x, 6] == null && board[x, 7] is Rook) {
+            if (board[x, 5] == null && board[x, 6] == null && board[x, 7] is Rook && !(board[x, 7] as Rook).walked) {
                 result.add(x to 6)
             }
-            if (board[x, 3] == null && board[x, 2] == null && board[x, 1] == null && board[x, 0] is Rook) {
+            if (board[x, 3] == null && board[x, 2] == null && board[x, 1] == null && board[x, 0] is Rook && !(board[x,0] as Rook).walked) {
                 result.add(x to 2)
             }
         }

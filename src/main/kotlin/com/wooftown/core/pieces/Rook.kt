@@ -11,6 +11,8 @@ import com.wooftown.core.PieceColor
  */
 class Rook(color: PieceColor,board: ChessBoard) : Piece(color,board) {
 
+    var walked = false
+
     /**
      * @param x - x cords of piece
      * @param y - y cords of piece

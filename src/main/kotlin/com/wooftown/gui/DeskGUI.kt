@@ -2,10 +2,7 @@ package com.wooftown.gui
 
 import com.wooftown.core.ChessBoard
 import com.wooftown.core.PieceColor
-import com.wooftown.core.pieces.King
-import com.wooftown.core.pieces.Pawn
-import com.wooftown.core.pieces.Piece
-import com.wooftown.core.pieces.Queen
+import com.wooftown.core.pieces.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.paint.Color
@@ -110,7 +107,7 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
         // castling
         if (this[row, column] is King) {
             val castleX = if (this[row, column]!!.color == PieceColor.WHITE) {
-                7
+                getSize() - 1
             } else {
                 0
             }
@@ -128,6 +125,15 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
         setImage(newRow, newColumn, getImage(row, column))
         setImage(row, column, null)
         // changing to queen
+
+        if(this[newRow, newColumn] is King){
+            (this[newRow, newColumn] as King).walked = true
+        }
+
+        if(this[newRow,newColumn] is Rook){
+            (this[newRow,newColumn] as Rook).walked = true
+        }
+
 
         //el passant
         if (this[newRow, newColumn] is Pawn) {
