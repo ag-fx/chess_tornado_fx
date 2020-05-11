@@ -31,16 +31,16 @@ class Pawn(color: PieceColor,board: ChessBoard) : Piece(color,board) {
         val board = this.getBoard()
 
         if (x == 1 && color == PieceColor.BLACK) {
-            if (board[x + 2, y] == null)
+            if (board[x + 2, y] == null && board[x + 1, y] == null)
                 result.add(x + 2 to y)
         }
 
-        if (x == 6 && color == PieceColor.WHITE) {
-            if (board[x - 2, y] == null)
+        if (x == board.getSize()- 2 && color == PieceColor.WHITE) {
+            if (board[x - 2, y] == null && board[x - 1, y] == null )
                 result.add(x - 2 to y)
         }
 
-        if (x + direction in 0..7 && board[x + direction, y] == null) {
+        if (x + direction in 0 until board.getSize() && board[x + direction, y] == null) {
             result.add(Pair(x + direction, y))
         }
 

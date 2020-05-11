@@ -17,10 +17,9 @@ enum class PieceColor {
     /**
      * @return opposite color
      */
-    fun opposite() = if (this == WHITE) {
-        BLACK
-    } else {
-        WHITE
+    fun opposite() = when(this){
+        WHITE -> BLACK
+        BLACK -> WHITE
     }
 
     override fun toString() = name.toLowerCase()
