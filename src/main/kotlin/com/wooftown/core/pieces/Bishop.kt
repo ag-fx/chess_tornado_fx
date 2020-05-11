@@ -1,5 +1,6 @@
 package com.wooftown.core.pieces
 
+import com.wooftown.core.ChessBoard
 import com.wooftown.core.PieceColor
 
 
@@ -8,7 +9,7 @@ import com.wooftown.core.PieceColor
  * Extends Piece
  * @param color - color of piece
  */
-class Bishop(color: PieceColor) : Piece(color) {
+class Bishop(color: PieceColor,board: ChessBoard) : Piece(color,board) {
 
     /**
      * @param x - x cords of piece
@@ -17,7 +18,7 @@ class Bishop(color: PieceColor) : Piece(color) {
      */
     override fun getPossibleMoves(x: Int, y: Int): List<Pair<Int, Int>> {
         val result = mutableListOf<Pair<Int, Int>>()
-        val board = this.getBoard()!!
+        val board = this.getBoard()
         for ((directionX, directionY) in listOf(Pair(1, 1), Pair(-1, -1), Pair(-1, 1), Pair(1, -1))) {
             var newX = x + directionX
             var newY = y + directionY

@@ -7,17 +7,7 @@ import com.wooftown.core.PieceColor
  * abstract description of piece
  * @param color - color of piece
  */
-abstract class Piece(val color: PieceColor) {
-
-    private var board: ChessBoard? = null
-
-    /**
-     * set pointer of desk
-     * @param board - desk
-     */
-    fun setBoard(board: ChessBoard) {
-        this.board = board
-    }
+abstract class Piece(val color: PieceColor, private val board: ChessBoard) {
 
     /**
      * @return pointer of desk

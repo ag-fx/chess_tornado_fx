@@ -142,10 +142,10 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
                 }
             }
             if (this[newRow, newColumn]!!.color == PieceColor.BLACK && newRow == 7) {
-                spawnPiece(Queen(PieceColor.BLACK), newRow, newColumn)
+                spawnPiece(Queen(PieceColor.BLACK,this), newRow, newColumn)
             } else {
                 if (this[newRow, newColumn]!!.color == PieceColor.WHITE && newRow == 0) {
-                    spawnPiece(Queen(PieceColor.WHITE), newRow, newColumn)
+                    spawnPiece(Queen(PieceColor.WHITE,this), newRow, newColumn)
                 }
             }
         }

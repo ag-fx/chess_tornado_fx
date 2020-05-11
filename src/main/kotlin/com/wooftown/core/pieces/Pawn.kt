@@ -1,5 +1,6 @@
 package com.wooftown.core.pieces
 
+import com.wooftown.core.ChessBoard
 import com.wooftown.core.PieceColor
 
 /**
@@ -7,7 +8,7 @@ import com.wooftown.core.PieceColor
  * Extends Piece
  * @param color - color of piece
  */
-class Pawn(color: PieceColor) : Piece(color) {
+class Pawn(color: PieceColor,board: ChessBoard) : Piece(color,board) {
     /**
      * Need for En Passant
      */
@@ -27,7 +28,7 @@ class Pawn(color: PieceColor) : Piece(color) {
         }
 
         val result = mutableListOf<Pair<Int, Int>>()
-        val board = this.getBoard()!!
+        val board = this.getBoard()
 
         if (x == 1 && color == PieceColor.BLACK) {
             if (board[x + 2, y] == null)

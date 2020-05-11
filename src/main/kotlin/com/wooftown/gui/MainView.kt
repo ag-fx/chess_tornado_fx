@@ -235,25 +235,25 @@ class MainView : View("TornadoChess") {
     private fun spawnAllPieces() {
         with(desk) {
             for (column in 0 until deskSize) {
-                spawnPiece(Pawn(PieceColor.BLACK), 1, column)
-                spawnPiece(Pawn(PieceColor.WHITE), 6, column)
+                spawnPiece(Pawn(PieceColor.BLACK,this), 1, column)
+                spawnPiece(Pawn(PieceColor.WHITE,this), 6, column)
             }
-            spawnPiece(Rook(PieceColor.WHITE), 7, 0)
-            spawnPiece(Rook(PieceColor.WHITE), 7, 7)
-            spawnPiece(Rook(PieceColor.BLACK), 0, 0)
-            spawnPiece(Rook(PieceColor.BLACK), 0, 7)
-            spawnPiece(Queen(PieceColor.WHITE), 7, 3)
-            spawnPiece(Queen(PieceColor.BLACK), 0, 3)
-            spawnPiece(King(PieceColor.BLACK), 0, 4)
-            spawnPiece(King(PieceColor.WHITE), 7, 4)
-            spawnPiece(Knight(PieceColor.WHITE), 7, 1)
-            spawnPiece(Knight(PieceColor.WHITE), 7, 6)
-            spawnPiece(Knight(PieceColor.BLACK), 0, 1)
-            spawnPiece(Knight(PieceColor.BLACK), 0, 6)
-            spawnPiece(Bishop(PieceColor.BLACK), 0, 2)
-            spawnPiece(Bishop(PieceColor.BLACK), 0, 5)
-            spawnPiece(Bishop(PieceColor.WHITE), 7, 5)
-            spawnPiece(Bishop(PieceColor.WHITE), 7, 2)
+            spawnPiece(Rook(PieceColor.WHITE,this), 7, 0)
+            spawnPiece(Rook(PieceColor.WHITE,this), 7, 7)
+            spawnPiece(Rook(PieceColor.BLACK,this), 0, 0)
+            spawnPiece(Rook(PieceColor.BLACK,this), 0, 7)
+            spawnPiece(Queen(PieceColor.WHITE,this), 7, 3)
+            spawnPiece(Queen(PieceColor.BLACK,this), 0, 3)
+            spawnPiece(King(PieceColor.BLACK,this), 0, 4)
+            spawnPiece(King(PieceColor.WHITE,this), 7, 4)
+            spawnPiece(Knight(PieceColor.WHITE,this), 7, 1)
+            spawnPiece(Knight(PieceColor.WHITE,this), 7, 6)
+            spawnPiece(Knight(PieceColor.BLACK,this), 0, 1)
+            spawnPiece(Knight(PieceColor.BLACK,this), 0, 6)
+            spawnPiece(Bishop(PieceColor.BLACK,this), 0, 2)
+            spawnPiece(Bishop(PieceColor.BLACK,this), 0, 5)
+            spawnPiece(Bishop(PieceColor.WHITE,this), 7, 5)
+            spawnPiece(Bishop(PieceColor.WHITE,this), 7, 2)
         }
     }
 

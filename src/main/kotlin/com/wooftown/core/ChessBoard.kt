@@ -54,8 +54,6 @@ open class ChessBoard(private val size: Int) {
         require(x in 0 until size && y in 0 until size)
         data[x][y] = value
         if (value is Piece) {
-            value.setBoard(this)
-
             if (value is King) {
                 if (value.color == PieceColor.WHITE) {
                     whiteKing = x to y
@@ -124,7 +122,7 @@ open class ChessBoard(private val size: Int) {
         for (i in 0 until size) {
             for (j in 0 until size) {
                 if (data[i][j] != null && data[i][j]!!.color == color) {
-                    if (getPossibleMoves(i, j).size > 1) {
+                    if (getPossibleMoves(i, j).isNotEmpty()) {
                         return false
                     }
                 }
