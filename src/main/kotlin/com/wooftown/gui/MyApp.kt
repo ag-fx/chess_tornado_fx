@@ -2,11 +2,6 @@ package com.wooftown.gui
 
 import tornadofx.*
 
-fun main(args : Array<String>){
-    println("test")
-}
-
-
 /**
  * App =)
  */
