@@ -14,8 +14,8 @@ class WinnerDialog(color: PieceColor) : Dialog<ButtonType>() {
     init {
         title = "Congratulation!!!"
         with(dialogPane) {
-            headerText = "$color is win"
-            buttonTypes.add(ButtonType("You can restart game in menu", ButtonBar.ButtonData.OK_DONE))
+            headerText = "$color is winning"
+            buttonTypes.add(ButtonType("Back to desk", ButtonBar.ButtonData.OK_DONE))
         }
     }
 }

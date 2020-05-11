@@ -98,6 +98,7 @@ class PiecesTest {
         desk[4, 3] = Pawn(PieceColor.BLACK,desk)
         desk[4, 2] = Pawn(PieceColor.WHITE,desk)
         (desk[4, 2] as Pawn).moveDouble = true
+        desk.setWalked(4,2)
         assertEquals(setOf(5 to 3, 5 to 2), movies(4, 3))
     }
 
