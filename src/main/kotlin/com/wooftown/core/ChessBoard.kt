@@ -26,6 +26,17 @@ open class ChessBoard(private val size: Int) {
     private var blackKing = 0 to 4
 
     /**
+     * Coords of last walked piece , need for El passat
+     */
+    private var lastWalked : Pair<Int?,Int?> = null to null
+
+    fun setWalked(x : Int , y : Int) {
+        lastWalked = x to y
+    }
+
+    fun getWalked() = lastWalked
+
+    /**
      * @param color - color of king which must to find
      * @return cords of king
      */

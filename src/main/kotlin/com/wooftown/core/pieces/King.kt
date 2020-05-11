@@ -45,10 +45,12 @@ class King(color: PieceColor,board: ChessBoard) : Piece(color,board){
             x == 0 && y == 4 && !walked
         }
         if (canCastle) {
-            if (board[x, 5] == null && board[x, 6] == null && board[x, 7] is Rook && !(board[x, 7] as Rook).walked) {
+            if (board[x, 5] == null && board[x, 6] == null && board[x, 7] is Rook &&
+                    !(board[x, 7] as Rook).walked) {
                 result.add(x to 6)
             }
-            if (board[x, 3] == null && board[x, 2] == null && board[x, 1] == null && board[x, 0] is Rook && !(board[x,0] as Rook).walked) {
+            if (board[x, 3] == null && board[x, 2] == null && board[x, 1] == null &&
+                    board[x, 0] is Rook && !(board[x,0] as Rook).walked) {
                 result.add(x to 2)
             }
         }

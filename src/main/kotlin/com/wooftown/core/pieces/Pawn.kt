@@ -44,18 +44,26 @@ class Pawn(color: PieceColor,board: ChessBoard) : Piece(color,board) {
             result.add(Pair(x + direction, y))
         }
 
-        if (y + 1 in 0 until board.getSize() && board[x, y + 1] is Pawn
-                && (board[x, y + 1] as Pawn).moveDouble && isOpposite(board[x, y + 1])) {
+        if (y + 1 in 0 until board.getSize()
+                && board[x, y + 1] is Pawn
+                && (board[x, y + 1] as Pawn).moveDouble
+                && x to y+1 == board.getWalked()
+                && isOpposite(board[x, y + 1])) {
             if (board[x + direction, y + 1] == null) {
                 result.add(x + direction to y + 1)
             }
         }
 
-        if (y - 1 in 0 until board.getSize() && board[x, y - 1] is Pawn
-                && (board[x, y - 1] as Pawn).moveDouble && isOpposite(board[x, y - 1])) {
+        if (y - 1 in 0 until board.getSize()
+                && board[x, y - 1] is Pawn
+                && (board[x, y - 1] as Pawn).moveDouble
+                && x to y-1 == board.getWalked()
+                && isOpposite(board[x, y - 1])) {
+
             if (board[x + direction, y - 1] == null) {
                 result.add(x + direction to y - 1)
             }
+
         }
 
         if (x + direction in 0 until board.getSize() && y + 1 in 0 until board.getSize()
