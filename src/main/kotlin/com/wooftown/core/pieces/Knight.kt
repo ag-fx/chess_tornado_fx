@@ -1,14 +1,14 @@
 package com.wooftown.core.pieces
 
 import com.wooftown.core.ChessBoard
-import com.wooftown.core.PieceColor
+import com.wooftown.core.MyColor
 
 /**
  * Knight
  * Extends Piece
  * @param color - color of piece
  */
-class Knight(color: PieceColor,board: ChessBoard) : Piece(color,board){
+class Knight(color: MyColor, board: ChessBoard) : Piece(color,board){
 
     /**
      * @param x - x cords of piece

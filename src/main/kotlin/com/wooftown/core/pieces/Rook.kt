@@ -1,7 +1,7 @@
 package com.wooftown.core.pieces
 
 import com.wooftown.core.ChessBoard
-import com.wooftown.core.PieceColor
+import com.wooftown.core.MyColor
 
 
 /**
@@ -9,7 +9,7 @@ import com.wooftown.core.PieceColor
  * Extends Piece
  * @param color - color of piece
  */
-class Rook(color: PieceColor,board: ChessBoard) : Piece(color,board) {
+class Rook(color: MyColor, board: ChessBoard) : Piece(color,board) {
 
     var walked = false
 

@@ -1,7 +1,7 @@
 package com.wooftown.gui
 
 import com.wooftown.controll.DragController
-import com.wooftown.core.PieceColor
+import com.wooftown.core.MyColor
 import com.wooftown.core.pieces.*
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.value.ObservableValue
@@ -41,12 +41,12 @@ class MainView : View("TornadoChess") {
     /**
      * Controller
      */
-    private val controller = DragController()
+    private val mouseController = DragController()
 
     /**
      * Last dropped cell
      */
-    private var lastDrop: Pair<Int?, Int?> = null to null
+    private var lastMouseDrop: Pair<Int?, Int?> = null to null
 
     /**
      * Status of game
@@ -60,17 +60,17 @@ class MainView : View("TornadoChess") {
 
     init {
         primaryStage.icons.add(Image("file:src\\main\\resources\\icon.png"))
-        setWindowMinSize(800, 850)
+        setWindowMinSize(600, 640)
 
         // stupid code
         primaryStage.widthProperty().addListener { _: ObservableValue<out Number?>?, _: Number?,
                                                    t1: Number ->
-            primaryStage.height = t1.toDouble().plus(35)
+            primaryStage.height = t1.toDouble().plus(45)
         }
 
         primaryStage.heightProperty().addListener { _: ObservableValue<out Number?>?, _: Number?,
                                                     t1: Number ->
-            primaryStage.width = t1.toDouble().minus(35)
+            primaryStage.width = t1.toDouble().minus(45)
         }
 
         with(root) {
@@ -142,7 +142,7 @@ class MainView : View("TornadoChess") {
                                     // EVENT HANDLING!!!!
                                     onDragDetected = EventHandler { event ->
                                         if (hintsIsOn.value && desk[row, column] is Piece &&
-                                                desk[row, column]!!.color == controller.getTurn()) {
+                                                desk[row, column]!!.color == mouseController.getTurn()) {
                                             enableHint(row, column)
                                         }
                                         val db: Dragboard = startDragAndDrop(TransferMode.MOVE)
@@ -166,7 +166,7 @@ class MainView : View("TornadoChess") {
                                         var success = false
                                         if (db.hasImage()) {
                                             success = true
-                                            lastDrop = row to column
+                                            lastMouseDrop = row to column
                                         }
                                         event.isDropCompleted = success
                                         event.consume()
@@ -177,9 +177,9 @@ class MainView : View("TornadoChess") {
                                         val db = event.dragboard
                                         desk.setImage(row, column, db.image)
                                         if (event.transferMode == TransferMode.MOVE) {
-                                            controller.handle(row, column, lastDrop.first, lastDrop.second)
+                                            mouseController.handle(row, column, lastMouseDrop.first, lastMouseDrop.second)
                                         }
-                                        lastDrop = null to null
+                                        lastMouseDrop = null to null
                                         updateStatus()
                                         event.consume()
                                     }
@@ -189,7 +189,7 @@ class MainView : View("TornadoChess") {
                         }
                     }
                     desk = DeskGUI(setUpCells, setUpImages, deskSize)
-                    controller.setDeskPointer(desk)
+                    mouseController.setDeskPointer(desk)
                 }
             }
         }
@@ -202,21 +202,21 @@ class MainView : View("TornadoChess") {
      */
     private fun updateStatus() {
         statusText.apply {
-            text = if (controller.getTurn() == PieceColor.WHITE) {
+            text = if (mouseController.getTurn() == MyColor.WHITE) {
                 "White's turn"
             } else {
                 "Black's turn"
             }
         }
-        if (desk.isLooser(controller.getTurn())) {
+        if (desk.isLooser(mouseController.getTurn())) {
             statusText.apply {
-                text = if (controller.getTurn().opposite() == PieceColor.WHITE) {
+                text = if (mouseController.getTurn().opposite() == MyColor.WHITE) {
                     "White win"
                 } else {
                     "Black win"
                 }
             }
-            WinnerDialog(controller.getTurn().opposite()).showAndWait()
+            WinnerDialog(mouseController.getTurn().opposite()).showAndWait()
         }
     }
 
@@ -224,7 +224,7 @@ class MainView : View("TornadoChess") {
      * Restarting game
      */
     private fun restartGame() {
-        controller.clear()
+        mouseController.clear()
         spawnAllPieces()
         updateStatus()
     }
@@ -235,25 +235,25 @@ class MainView : View("TornadoChess") {
     private fun spawnAllPieces() {
         with(desk) {
             for (column in 0 until deskSize) {
-                spawnPiece(Pawn(PieceColor.BLACK,this), 1, column)
-                spawnPiece(Pawn(PieceColor.WHITE,this), 6, column)
+                spawnPiece(Pawn(MyColor.BLACK,this), 1, column)
+                spawnPiece(Pawn(MyColor.WHITE,this), 6, column)
             }
-            spawnPiece(Rook(PieceColor.WHITE,this), 7, 0)
-            spawnPiece(Rook(PieceColor.WHITE,this), 7, 7)
-            spawnPiece(Rook(PieceColor.BLACK,this), 0, 0)
-            spawnPiece(Rook(PieceColor.BLACK,this), 0, 7)
-            spawnPiece(Queen(PieceColor.WHITE,this), 7, 3)
-            spawnPiece(Queen(PieceColor.BLACK,this), 0, 3)
-            spawnPiece(King(PieceColor.BLACK,this), 0, 4)
-            spawnPiece(King(PieceColor.WHITE,this), 7, 4)
-            spawnPiece(Knight(PieceColor.WHITE,this), 7, 1)
-            spawnPiece(Knight(PieceColor.WHITE,this), 7, 6)
-            spawnPiece(Knight(PieceColor.BLACK,this), 0, 1)
-            spawnPiece(Knight(PieceColor.BLACK,this), 0, 6)
-            spawnPiece(Bishop(PieceColor.BLACK,this), 0, 2)
-            spawnPiece(Bishop(PieceColor.BLACK,this), 0, 5)
-            spawnPiece(Bishop(PieceColor.WHITE,this), 7, 5)
-            spawnPiece(Bishop(PieceColor.WHITE,this), 7, 2)
+            spawnPiece(Rook(MyColor.WHITE,this), 7, 0)
+            spawnPiece(Rook(MyColor.WHITE,this), 7, 7)
+            spawnPiece(Rook(MyColor.BLACK,this), 0, 0)
+            spawnPiece(Rook(MyColor.BLACK,this), 0, 7)
+            spawnPiece(Queen(MyColor.WHITE,this), 7, 3)
+            spawnPiece(Queen(MyColor.BLACK,this), 0, 3)
+            spawnPiece(King(MyColor.BLACK,this), 0, 4)
+            spawnPiece(King(MyColor.WHITE,this), 7, 4)
+            spawnPiece(Knight(MyColor.WHITE,this), 7, 1)
+            spawnPiece(Knight(MyColor.WHITE,this), 7, 6)
+            spawnPiece(Knight(MyColor.BLACK,this), 0, 1)
+            spawnPiece(Knight(MyColor.BLACK,this), 0, 6)
+            spawnPiece(Bishop(MyColor.BLACK,this), 0, 2)
+            spawnPiece(Bishop(MyColor.BLACK,this), 0, 5)
+            spawnPiece(Bishop(MyColor.WHITE,this), 7, 5)
+            spawnPiece(Bishop(MyColor.WHITE,this), 7, 2)
         }
     }
 

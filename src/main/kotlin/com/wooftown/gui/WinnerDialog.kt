@@ -1,6 +1,6 @@
 package com.wooftown.gui
 
-import com.wooftown.core.PieceColor
+import com.wooftown.core.MyColor
 import javafx.scene.control.ButtonBar
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Dialog
@@ -10,7 +10,7 @@ import javafx.scene.control.Dialog
  * @param color - winner's color
  * @see dialog when you can see who is win and exit from it
  */
-class WinnerDialog(color: PieceColor) : Dialog<ButtonType>() {
+class WinnerDialog(color: MyColor) : Dialog<ButtonType>() {
     init {
         title = "Congratulation!!!"
         with(dialogPane) {

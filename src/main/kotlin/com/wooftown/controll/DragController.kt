@@ -1,6 +1,6 @@
 package com.wooftown.controll
 
-import com.wooftown.core.PieceColor
+import com.wooftown.core.MyColor
 import com.wooftown.core.pieces.Piece
 import com.wooftown.gui.DeskGUI
 
@@ -11,7 +11,7 @@ class DragController {
         desk = deskGUI
     }
 
-    private var turnNow = PieceColor.WHITE
+    private var turnNow = MyColor.WHITE
 
     fun getTurn() = turnNow
 
@@ -29,7 +29,7 @@ class DragController {
 
     fun clear() {
         desk.clear()
-        turnNow = PieceColor.WHITE
+        turnNow = MyColor.WHITE
     }
 
     override fun hashCode(): Int = desk.hashCode() * 31 + turnNow.hashCode()

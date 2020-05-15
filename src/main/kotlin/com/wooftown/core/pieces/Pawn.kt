@@ -1,14 +1,14 @@
 package com.wooftown.core.pieces
 
 import com.wooftown.core.ChessBoard
-import com.wooftown.core.PieceColor
+import com.wooftown.core.MyColor
 
 /**
  * Pawn
  * Extends Piece
  * @param color - color of piece
  */
-class Pawn(color: PieceColor,board: ChessBoard) : Piece(color,board) {
+class Pawn(color: MyColor, board: ChessBoard) : Piece(color,board) {
     /**
      * Need for En Passant
      */
@@ -21,7 +21,7 @@ class Pawn(color: PieceColor,board: ChessBoard) : Piece(color,board) {
      */
     override fun getPossibleMoves(x: Int, y: Int): List<Pair<Int, Int>> {
 
-        val direction = if (color == PieceColor.BLACK) {
+        val direction = if (color == MyColor.BLACK) {
             1
         } else {
             -1
@@ -30,12 +30,12 @@ class Pawn(color: PieceColor,board: ChessBoard) : Piece(color,board) {
         val result = mutableListOf<Pair<Int, Int>>()
         val board = this.getBoard()
 
-        if (x == 1 && color == PieceColor.BLACK) {
+        if (x == 1 && color == MyColor.BLACK) {
             if (board[x + 2, y] == null && board[x + 1, y] == null)
                 result.add(x + 2 to y)
         }
 
-        if (x == board.getSize()- 2 && color == PieceColor.WHITE) {
+        if (x == board.getSize()- 2 && color == MyColor.WHITE) {
             if (board[x - 2, y] == null && board[x - 1, y] == null )
                 result.add(x - 2 to y)
         }

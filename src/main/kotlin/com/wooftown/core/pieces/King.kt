@@ -1,14 +1,14 @@
 package com.wooftown.core.pieces
 
 import com.wooftown.core.ChessBoard
-import com.wooftown.core.PieceColor
+import com.wooftown.core.MyColor
 
 /**
  * King
  * Extends Piece
  * @param color - color of piece
  */
-class King(color: PieceColor,board: ChessBoard) : Piece(color,board){
+class King(color: MyColor, board: ChessBoard) : Piece(color,board){
 
     var walked = false
 
@@ -39,7 +39,7 @@ class King(color: PieceColor,board: ChessBoard) : Piece(color,board){
     private fun castling(x: Int, y: Int): List<Pair<Int, Int>> {
         val result = mutableListOf<Pair<Int, Int>>()
         val board = this.getBoard()
-        val canCastle = if (color == PieceColor.WHITE) {
+        val canCastle = if (color == MyColor.WHITE) {
             x == board.getSize() -1 && y == 4 && !walked
         } else {
             x == 0 && y == 4 && !walked

@@ -18,7 +18,7 @@ open class ChessBoard(private val size: Int) {
     /**
      * Cords of white king , uses for castles
      */
-    private var whiteKing = 7 to 4
+    private var whiteKing = size-1 to 4
 
     /**
      * Cords of black king , uses for castles
@@ -40,8 +40,8 @@ open class ChessBoard(private val size: Int) {
      * @param color - color of king which must to find
      * @return cords of king
      */
-    private fun getKing(color: PieceColor): Pair<Int, Int> =
-            if (color == PieceColor.WHITE) {
+    private fun getKing(color: MyColor): Pair<Int, Int> =
+            if (color == MyColor.WHITE) {
                 whiteKing
             } else {
                 blackKing
@@ -66,7 +66,7 @@ open class ChessBoard(private val size: Int) {
         data[x][y] = value
         if (value is Piece) {
             if (value is King) {
-                if (value.color == PieceColor.WHITE) {
+                if (value.color == MyColor.WHITE) {
                     whiteKing = x to y
                 } else {
                     blackKing = x to y
@@ -90,7 +90,7 @@ open class ChessBoard(private val size: Int) {
      * @param color - color of checking player
      * @return boolean - true os castled
      */
-    private fun isCheck(color: PieceColor): Boolean {
+    private fun isCheck(color: MyColor): Boolean {
         val king = getKing(color)
         for (i in 0 until size) {
             for (j in 0 until size) {
@@ -129,7 +129,7 @@ open class ChessBoard(private val size: Int) {
      * check for looser in game
      * @return color of looser
      */
-    fun isLooser(color: PieceColor): Boolean {
+    fun isLooser(color: MyColor): Boolean {
         for (i in 0 until size) {
             for (j in 0 until size) {
                 if (data[i][j] != null && data[i][j]!!.color == color) {

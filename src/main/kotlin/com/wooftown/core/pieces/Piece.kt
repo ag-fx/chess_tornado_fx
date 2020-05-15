@@ -1,13 +1,13 @@
 package com.wooftown.core.pieces
 
 import com.wooftown.core.ChessBoard
-import com.wooftown.core.PieceColor
+import com.wooftown.core.MyColor
 
 /**
  * abstract description of piece
  * @param color - color of piece
  */
-abstract class Piece(val color: PieceColor, private val board: ChessBoard) {
+abstract class Piece(val color: MyColor, private val board: ChessBoard) {
 
     /**
      * @return pointer of desk

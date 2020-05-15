@@ -1,7 +1,7 @@
 package com.wooftown.gui
 
 import com.wooftown.core.ChessBoard
-import com.wooftown.core.PieceColor
+import com.wooftown.core.MyColor
 import com.wooftown.core.pieces.*
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
@@ -107,7 +107,7 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
     fun movePiece(row: Int, column: Int, newRow: Int, newColumn: Int) {
         // castling
         if (this[row, column] is King) {
-            val castleX = if (this[row, column]!!.color == PieceColor.WHITE) {
+            val castleX = if (this[row, column]!!.color == MyColor.WHITE) {
                 getSize() - 1
             } else {
                 0
@@ -142,17 +142,17 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
             (this[newRow, newColumn] as Pawn).moveDouble = abs(newRow - row) == 2
 
             if (abs(column - newColumn) == 1 && deleted == null) {
-                if (this[newRow, newColumn]!!.color == PieceColor.WHITE) {
+                if (this[newRow, newColumn]!!.color == MyColor.WHITE) {
                     despairPiece(newRow + 1, newColumn)
                 } else {
                     despairPiece(newRow - 1, newColumn)
                 }
             }
-            if (this[newRow, newColumn]!!.color == PieceColor.BLACK && newRow == 7) {
-                spawnPiece(Queen(PieceColor.BLACK,this), newRow, newColumn)
+            if (this[newRow, newColumn]!!.color == MyColor.BLACK && newRow == 7) {
+                spawnPiece(Queen(MyColor.BLACK,this), newRow, newColumn)
             } else {
-                if (this[newRow, newColumn]!!.color == PieceColor.WHITE && newRow == 0) {
-                    spawnPiece(Queen(PieceColor.WHITE,this), newRow, newColumn)
+                if (this[newRow, newColumn]!!.color == MyColor.WHITE && newRow == 0) {
+                    spawnPiece(Queen(MyColor.WHITE,this), newRow, newColumn)
                 }
             }
         }

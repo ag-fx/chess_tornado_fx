@@ -3,7 +3,7 @@ package com.wooftown.core
 /**
  * Colors of pieces
  */
-enum class PieceColor {
+enum class MyColor {
     /**
      * White piece
      */
