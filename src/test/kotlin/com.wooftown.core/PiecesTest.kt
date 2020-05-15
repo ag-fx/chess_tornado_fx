@@ -1,8 +1,9 @@
 package com.wooftown.core
 
 import com.wooftown.core.pieces.*
-import org.junit.Assert.*
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.*
+
+import org.junit.jupiter.api.Test
 
 
 val desk = ChessBoard(8)
