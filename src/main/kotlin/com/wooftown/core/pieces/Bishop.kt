@@ -8,6 +8,7 @@ import com.wooftown.core.MyColor
  * Bishop
  * Extends Piece
  * @param color - color of piece
+ * @param board - pointer of desk
  */
 class Bishop(color: MyColor, board: ChessBoard) : Piece(color,board) {
 

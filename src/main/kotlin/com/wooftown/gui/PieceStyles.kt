@@ -6,6 +6,9 @@ package com.wooftown.gui
 enum class PieceStyles {
     CLASSIC, BERLIN, METRO, CHESS24;
 
+    /**
+     * Needs for taking path of piece's png.
+     */
     override fun toString(): String {
         return this.name.toLowerCase()
     }

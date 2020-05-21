@@ -7,9 +7,13 @@ import com.wooftown.core.MyColor
  * King
  * Extends Piece
  * @param color - color of piece
+ * @param board - pointer of desk
  */
 class King(color: MyColor, board: ChessBoard) : Piece(color,board){
 
+    /**
+     * Need for castling
+     */
     var walked = false
 
     /**

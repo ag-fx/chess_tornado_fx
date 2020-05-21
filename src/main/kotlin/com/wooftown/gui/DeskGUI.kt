@@ -9,9 +9,6 @@ import javafx.scene.paint.Color
 import javafx.scene.shape.Rectangle
 import kotlin.math.abs
 
-// расширенный класс доски, в которой реализованы ходы и изменение view
-// можно было бы всё перенести в контроллер
-
 /**
  * Extended desk class for interaction with GUI
  * @param cells - List of cells for changing their

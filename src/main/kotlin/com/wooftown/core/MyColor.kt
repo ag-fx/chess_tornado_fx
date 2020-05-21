@@ -22,5 +22,8 @@ enum class MyColor {
         BLACK -> WHITE
     }
 
+    /**
+     * Also needs for taking png of pieces
+     */
     override fun toString() = name.toLowerCase()
 }

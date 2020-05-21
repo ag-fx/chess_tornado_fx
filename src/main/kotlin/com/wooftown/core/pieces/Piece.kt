@@ -6,6 +6,7 @@ import com.wooftown.core.MyColor
 /**
  * abstract description of piece
  * @param color - color of piece
+ * @param board - pointer of desk
  */
 abstract class Piece(val color: MyColor, private val board: ChessBoard) {
 

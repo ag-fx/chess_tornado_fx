@@ -7,6 +7,7 @@ import com.wooftown.core.MyColor
  * Queen
  * Extends Piece
  * @param color - color of piece
+ * @param board - pointer of desk
  */
 class Queen(color: MyColor, board: ChessBoard) : Piece(color,board){
 

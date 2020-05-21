@@ -8,9 +8,13 @@ import com.wooftown.core.MyColor
  * Rook
  * Extends Piece
  * @param color - color of piece
+ * @param board - pointer of desk
  */
 class Rook(color: MyColor, board: ChessBoard) : Piece(color,board) {
 
+    /**
+     * Need for castling
+     */
     var walked = false
 
     /**

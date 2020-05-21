@@ -8,10 +8,13 @@ import com.wooftown.core.pieces.Piece
  */
 open class ChessBoard(private val size: Int) {
 
+    /**
+     * Desk size getter
+     */
     fun getSize() = size
 
     /**
-     * Out gaming desk
+     * Data of gaming desk
      */
     private val data = List(size) { MutableList<Piece?>(size) { null } }
 
@@ -142,7 +145,13 @@ open class ChessBoard(private val size: Int) {
         return true
     }
 
+    /**
+     * Hashcode depends on our data.
+     */
     override fun hashCode(): Int = data.hashCode()
 
+    /**
+     * Equals
+     */
     override fun equals(other: Any?): Boolean = other is ChessBoard && other.data == this.data
 }

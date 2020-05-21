@@ -139,6 +139,7 @@ class MainView : View("TornadoChess") {
                                         fitWidthProperty().bind(fitHeightProperty())
                                     }
 
+
                                     // EVENT HANDLING!!!!
                                     onDragDetected = EventHandler { event ->
                                         if (hintsIsOn.value && desk[row, column] is Piece &&
@@ -183,11 +184,13 @@ class MainView : View("TornadoChess") {
                                         updateStatus()
                                         event.consume()
                                     }
+
                                     // EVENT HANDLING
                                 }
                             }
                         }
                     }
+                    // сделал так, чтобы не идти ещё раз по циклу устанавливая листнеры
                     desk = DeskGUI(setUpCells, setUpImages, deskSize)
                     mouseController.setDeskPointer(desk)
                 }
@@ -257,6 +260,12 @@ class MainView : View("TornadoChess") {
         }
     }
 
+    /**
+     * Enable hints which show possible moves for piece
+     * Usually work in cycle with cells which need to light
+     * @param row - row
+     * @param column - column
+     */
     private fun enableHint(row: Int, column: Int) {
         for ((x, y) in desk.getPossibleMoves(row, column)) {
             if ((x + y) % 2 == 0) {
@@ -268,6 +277,9 @@ class MainView : View("TornadoChess") {
         }
     }
 
+    /**
+     * Disable hints
+     */
     private fun disableHint(row: Int, column: Int) {
         for ((x, y) in desk.getPossibleMoves(row, column)) {
             if ((x + y) % 2 == 0) {
