@@ -1,11 +1,11 @@
 # Chess with Kotlin TornadoFX
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/54906005/80477614-e88c7a00-8954-11ea-9d9e-66090ec89761.png">
+  <img src="https://user-images.githubusercontent.com/54906005/82561856-c87b5f80-9b7c-11ea-97f8-4aae3ce70f41.png">
 </p>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/54906005/80477652-ff32d100-8954-11ea-8dce-47db031916df.png">
+  <img src="https://user-images.githubusercontent.com/54906005/82561891-daf59900-9b7c-11ea-8aac-eb15761abad4.png">
 </p>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/54906005/80477821-4325d600-8955-11ea-8515-4b9e6c50a624.png">
+  <img src="https://user-images.githubusercontent.com/54906005/82561933-f2348680-9b7c-11ea-92e2-30e9ddf800d7.png">
 </p>
