@@ -130,7 +130,7 @@ class MainView : View("TornadoChess") {
                                             Color.rgb(181, 136, 99)
                                         }
                                         widthProperty().bind(root.widthProperty().divide(deskSize))
-                                        heightProperty().bind(widthProperty() - 4)
+                                        heightProperty().bind(widthProperty() - (deskSize/2))
                                     }
 
                                     setUpImages[row][column] = imageview {
