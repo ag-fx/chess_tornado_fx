@@ -4,6 +4,10 @@ import com.wooftown.core.MyColor
 import javafx.scene.control.ButtonBar
 import javafx.scene.control.ButtonType
 import javafx.scene.control.Dialog
+import javafx.scene.image.Image
+import javafx.scene.image.ImageView
+import tornadofx.*
+import tornadofx.FX.Companion.primaryStage
 
 /**
  * Dialog which says who is win
@@ -12,10 +16,10 @@ import javafx.scene.control.Dialog
  */
 class WinnerDialog(color: MyColor) : Dialog<ButtonType>() {
     init {
-        title = "Congratulation!!!"
+        title = "congrats"
         with(dialogPane) {
             headerText = "$color is winning"
-            buttonTypes.add(ButtonType("Back to desk", ButtonBar.ButtonData.OK_DONE))
+            buttonTypes.add(ButtonType("back to desk", ButtonBar.ButtonData.OK_DONE))
         }
     }
 }

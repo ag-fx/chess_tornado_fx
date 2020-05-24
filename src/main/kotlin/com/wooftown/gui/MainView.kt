@@ -107,7 +107,7 @@ class MainView : View("TornadoChess") {
                     }
                     borderpane {
                         center {
-                            statusText = text("White's turn") {
+                            statusText = text("white's turn") {
                                 fill = Color.BLACK
                                 font = Font(20.0)
                             }
@@ -205,19 +205,11 @@ class MainView : View("TornadoChess") {
      */
     private fun updateStatus() {
         statusText.apply {
-            text = if (mouseController.getTurn() == MyColor.WHITE) {
-                "White's turn"
-            } else {
-                "Black's turn"
-            }
+            text = "${mouseController.getTurn()}'s turn"
         }
         if (desk.isLooser(mouseController.getTurn())) {
             statusText.apply {
-                text = if (mouseController.getTurn().opposite() == MyColor.WHITE) {
-                    "White win"
-                } else {
-                    "Black win"
-                }
+                text = "${mouseController.getTurn().opposite()} win"
             }
             WinnerDialog(mouseController.getTurn().opposite()).showAndWait()
         }
