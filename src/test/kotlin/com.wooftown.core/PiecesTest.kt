@@ -128,4 +128,21 @@ class PiecesTest {
         assertEquals(squares(listOf("a7", "a6", "a5", "b8", "c8", "d8", "e8")), movies(0, 0))
 
     }
+
+    @Test
+    fun looser(){
+        desk.clear()
+        desk[0, 4] = King(MyColor.BLACK,desk)
+        desk[1,4] = Queen(MyColor.WHITE,desk)
+        desk[1,3] = Queen(MyColor.WHITE,desk)
+        desk[1,5] = Queen(MyColor.WHITE,desk)
+        desk[0,5] = Queen(MyColor.WHITE,desk)
+        desk[0,3] = Queen(MyColor.WHITE,desk)
+        assertTrue(desk.isLooser(MyColor.BLACK))
+        desk.clear()
+        desk[0, 4] = King(MyColor.BLACK,desk)
+        desk[1,4] = Queen(MyColor.WHITE,desk)
+        assertFalse(desk.isLooser(MyColor.BLACK))
+    }
+
 }
