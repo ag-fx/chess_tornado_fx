@@ -21,7 +21,7 @@ open class ChessBoard(private val size: Int) {
     /**
      * Cords of white king , uses for castles
      */
-    private var whiteKing = size-1 to 4
+    private var whiteKing = size - 1 to 4
 
     /**
      * Cords of black king , uses for castles
@@ -31,9 +31,9 @@ open class ChessBoard(private val size: Int) {
     /**
      * Coords of last walked piece , need for El passat
      */
-    private var lastWalked : Pair<Int?,Int?> = null to null
+    private var lastWalked: Pair<Int?, Int?> = null to null
 
-    fun setWalked(x : Int , y : Int) {
+    fun setWalked(x: Int, y: Int) {
         lastWalked = x to y
     }
 

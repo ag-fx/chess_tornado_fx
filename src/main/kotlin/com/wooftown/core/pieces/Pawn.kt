@@ -9,7 +9,7 @@ import com.wooftown.core.MyColor
  * @param color - color of piece
  * @param board - pointer of desk
  */
-class Pawn(color: MyColor, board: ChessBoard) : Piece(color,board) {
+class Pawn(color: MyColor, board: ChessBoard) : Piece(color, board) {
     /**
      * Need for En Passant
      */
@@ -36,8 +36,8 @@ class Pawn(color: MyColor, board: ChessBoard) : Piece(color,board) {
                 result.add(x + 2 to y)
         }
 
-        if (x == board.getSize()- 2 && color == MyColor.WHITE) {
-            if (board[x - 2, y] == null && board[x - 1, y] == null )
+        if (x == board.getSize() - 2 && color == MyColor.WHITE) {
+            if (board[x - 2, y] == null && board[x - 1, y] == null)
                 result.add(x - 2 to y)
         }
 
@@ -48,7 +48,7 @@ class Pawn(color: MyColor, board: ChessBoard) : Piece(color,board) {
         if (y + 1 in 0 until board.getSize()
                 && board[x, y + 1] is Pawn
                 && (board[x, y + 1] as Pawn).moveDouble
-                && x to y+1 == board.getWalked()
+                && x to y + 1 == board.getWalked()
                 && isOpposite(board[x, y + 1])) {
             if (board[x + direction, y + 1] == null) {
                 result.add(x + direction to y + 1)
@@ -58,7 +58,7 @@ class Pawn(color: MyColor, board: ChessBoard) : Piece(color,board) {
         if (y - 1 in 0 until board.getSize()
                 && board[x, y - 1] is Pawn
                 && (board[x, y - 1] as Pawn).moveDouble
-                && x to y-1 == board.getWalked()
+                && x to y - 1 == board.getWalked()
                 && isOpposite(board[x, y - 1])) {
 
             if (board[x + direction, y - 1] == null) {

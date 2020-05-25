@@ -10,7 +10,7 @@ import com.wooftown.core.MyColor
  * @param color - color of piece
  * @param board - pointer of desk
  */
-class Rook(color: MyColor, board: ChessBoard) : Piece(color,board) {
+class Rook(color: MyColor, board: ChessBoard) : Piece(color, board) {
 
     /**
      * Need for castling

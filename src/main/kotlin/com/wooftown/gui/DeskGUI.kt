@@ -124,12 +124,12 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
         setImage(row, column, null)
         // changing to queen
 
-        if(this[newRow, newColumn] is King){
+        if (this[newRow, newColumn] is King) {
             (this[newRow, newColumn] as King).walked = true
         }
 
-        if(this[newRow,newColumn] is Rook){
-            (this[newRow,newColumn] as Rook).walked = true
+        if (this[newRow, newColumn] is Rook) {
+            (this[newRow, newColumn] as Rook).walked = true
         }
 
 
@@ -146,14 +146,14 @@ class DeskGUI(private val cells: List<List<Rectangle>>,
                 }
             }
             if (this[newRow, newColumn]!!.color == MyColor.BLACK && newRow == 7) {
-                spawnPiece(Queen(MyColor.BLACK,this), newRow, newColumn)
+                spawnPiece(Queen(MyColor.BLACK, this), newRow, newColumn)
             } else {
                 if (this[newRow, newColumn]!!.color == MyColor.WHITE && newRow == 0) {
-                    spawnPiece(Queen(MyColor.WHITE,this), newRow, newColumn)
+                    spawnPiece(Queen(MyColor.WHITE, this), newRow, newColumn)
                 }
             }
         }
-        setWalked(newRow,newColumn)
+        setWalked(newRow, newColumn)
     }
 
     /**

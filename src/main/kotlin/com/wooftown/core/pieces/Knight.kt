@@ -9,7 +9,7 @@ import com.wooftown.core.MyColor
  * @param color - color of piece
  * @param board - pointer of desk
  */
-class Knight(color: MyColor, board: ChessBoard) : Piece(color,board){
+class Knight(color: MyColor, board: ChessBoard) : Piece(color, board) {
 
     /**
      * @param x - x cords of piece

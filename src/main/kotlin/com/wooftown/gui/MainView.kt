@@ -130,7 +130,7 @@ class MainView : View("TornadoChess") {
                                             Color.rgb(181, 136, 99)
                                         }
                                         widthProperty().bind(root.widthProperty().divide(deskSize))
-                                        heightProperty().bind(widthProperty() - (deskSize/2))
+                                        heightProperty().bind(widthProperty() - (deskSize / 2))
                                     }
 
                                     setUpImages[row][column] = imageview {
@@ -230,25 +230,25 @@ class MainView : View("TornadoChess") {
     private fun spawnAllPieces() {
         with(desk) {
             for (column in 0 until deskSize) {
-                spawnPiece(Pawn(MyColor.BLACK,this), 1, column)
-                spawnPiece(Pawn(MyColor.WHITE,this), 6, column)
+                spawnPiece(Pawn(MyColor.BLACK, this), 1, column)
+                spawnPiece(Pawn(MyColor.WHITE, this), 6, column)
             }
-            spawnPiece(Rook(MyColor.WHITE,this), 7, 0)
-            spawnPiece(Rook(MyColor.WHITE,this), 7, 7)
-            spawnPiece(Rook(MyColor.BLACK,this), 0, 0)
-            spawnPiece(Rook(MyColor.BLACK,this), 0, 7)
-            spawnPiece(Queen(MyColor.WHITE,this), 7, 3)
-            spawnPiece(Queen(MyColor.BLACK,this), 0, 3)
-            spawnPiece(King(MyColor.BLACK,this), 0, 4)
-            spawnPiece(King(MyColor.WHITE,this), 7, 4)
-            spawnPiece(Knight(MyColor.WHITE,this), 7, 1)
-            spawnPiece(Knight(MyColor.WHITE,this), 7, 6)
-            spawnPiece(Knight(MyColor.BLACK,this), 0, 1)
-            spawnPiece(Knight(MyColor.BLACK,this), 0, 6)
-            spawnPiece(Bishop(MyColor.BLACK,this), 0, 2)
-            spawnPiece(Bishop(MyColor.BLACK,this), 0, 5)
-            spawnPiece(Bishop(MyColor.WHITE,this), 7, 5)
-            spawnPiece(Bishop(MyColor.WHITE,this), 7, 2)
+            spawnPiece(Rook(MyColor.WHITE, this), 7, 0)
+            spawnPiece(Rook(MyColor.WHITE, this), 7, 7)
+            spawnPiece(Rook(MyColor.BLACK, this), 0, 0)
+            spawnPiece(Rook(MyColor.BLACK, this), 0, 7)
+            spawnPiece(Queen(MyColor.WHITE, this), 7, 3)
+            spawnPiece(Queen(MyColor.BLACK, this), 0, 3)
+            spawnPiece(King(MyColor.BLACK, this), 0, 4)
+            spawnPiece(King(MyColor.WHITE, this), 7, 4)
+            spawnPiece(Knight(MyColor.WHITE, this), 7, 1)
+            spawnPiece(Knight(MyColor.WHITE, this), 7, 6)
+            spawnPiece(Knight(MyColor.BLACK, this), 0, 1)
+            spawnPiece(Knight(MyColor.BLACK, this), 0, 6)
+            spawnPiece(Bishop(MyColor.BLACK, this), 0, 2)
+            spawnPiece(Bishop(MyColor.BLACK, this), 0, 5)
+            spawnPiece(Bishop(MyColor.WHITE, this), 7, 5)
+            spawnPiece(Bishop(MyColor.WHITE, this), 7, 2)
         }
     }
 

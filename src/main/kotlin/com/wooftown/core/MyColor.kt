@@ -17,7 +17,7 @@ enum class MyColor {
     /**
      * @return opposite color
      */
-    fun opposite() = when(this){
+    fun opposite() = when (this) {
         WHITE -> BLACK
         BLACK -> WHITE
     }
