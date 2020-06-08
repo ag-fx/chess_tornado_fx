@@ -10,11 +10,15 @@ import javafx.scene.control.Dialog
  * @param color - winner's color
  * @see dialog when you can see who is win and exit from it
  */
-class WinnerDialog(color: MyColor) : Dialog<ButtonType>() {
+class WinnerDialog(color: MyColor?) : Dialog<ButtonType>() {
     init {
         title = "congrats"
         with(dialogPane) {
-            headerText = "$color is winning"
+            headerText = if (color == null){
+                "Draw"
+            } else{
+                "$color is winning"
+            }
             buttonTypes.add(ButtonType("back to desk", ButtonBar.ButtonData.OK_DONE))
         }
     }

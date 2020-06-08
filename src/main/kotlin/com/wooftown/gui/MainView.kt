@@ -184,7 +184,6 @@ class MainView : View("TornadoChess") {
                                         updateStatus()
                                         event.consume()
                                     }
-
                                     // EVENT HANDLING
                                 }
                             }
@@ -207,6 +206,10 @@ class MainView : View("TornadoChess") {
         statusText.apply {
             text = "${mouseController.getTurn()}'s turn"
         }
+        if (desk.checkDraw()){
+            WinnerDialog(null).showAndWait()
+        }
+
         if (desk.isLooser(mouseController.getTurn())) {
             statusText.apply {
                 text = "${mouseController.getTurn().opposite()} win"
@@ -284,6 +287,3 @@ class MainView : View("TornadoChess") {
     }
 
 }
-
-
-
