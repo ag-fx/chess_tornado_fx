@@ -145,11 +145,11 @@ open class ChessBoard(private val size: Int) {
         return true
     }
 
-    fun checkDraw() : Boolean{
-        for (i in 0 until size) {
-            for (j in 0 until size) {
-                if (data[i][j] != null && data[i][j] !is King) {
-                        return false
+    fun checkDraw(): Boolean {
+        data.forEach {
+            it.forEach { piece ->
+                if (piece != null && piece !is King) {
+                    return false
                 }
             }
         }
